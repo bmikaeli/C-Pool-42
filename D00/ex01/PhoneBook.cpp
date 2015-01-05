@@ -58,7 +58,7 @@ void search(Contact *contacts) {
     int index = -42;
 
     if (i < contacts[0].getNbContacts()) {
-        std::cout << "index     |firstname |lastname  |nickname  |" << std::endl;
+        std::cout << "Index     |FirstName |LastName  |NickName  |" << std::endl;
         while (i < contacts[0].getNbContacts()) {
             contacts[i].displayInfos(i);
             i++;
