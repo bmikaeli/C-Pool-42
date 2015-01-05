@@ -19,7 +19,8 @@ CC = g++ $(FLAGS)
 FLAGS = -Wall -Wextra -Werror
 
 SRC = main.cpp \
-	Contact.Class.cpp
+	Contact.Class.cpp \
+	PhoneBook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
