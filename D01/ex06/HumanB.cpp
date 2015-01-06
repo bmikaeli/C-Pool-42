@@ -12,7 +12,7 @@ HumanB::~HumanB(void) {
 //    std::cout << "humanB destructor" << std::endl;
 }
 
-void HumanB::setWeapon(Weapon &weapon){
+void HumanB::setWeapon(Weapon &weapon) {
     this->weapon = &weapon;
 }
 

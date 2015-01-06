@@ -11,8 +11,8 @@ Brain::~Brain(void) {
 std::string Brain::identify() {
 
     std::string str;
-    std::ostringstream  convert;
+    std::ostringstream convert;
     convert << this;
-    str =  convert.str();
+    str = convert.str();
     return str;
 }

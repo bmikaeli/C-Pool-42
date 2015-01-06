@@ -8,8 +8,10 @@ class ZombieEvent {
 
 public :
     ZombieEvent(void);
+
     ~ZombieEvent(void);
-    void setZombieType(std::string type, Zombie * zombie);
+
+    void setZombieType(std::string type, Zombie *zombie);
 
     Zombie *newZombie(std::string name);
 

@@ -12,10 +12,10 @@ public:
 
     std::string identify(void);
 
-    Brain * getBrain();
+    Brain *getBrain();
 
 private:
-    Brain * brain;
+    Brain *brain;
 };
 
 #endif

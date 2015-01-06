@@ -17,6 +17,7 @@ public:
 
 private:
     void createZombie(int N);
+
     int numberOfZombie;
 };
 
