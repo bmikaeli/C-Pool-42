@@ -11,10 +11,8 @@ Fixed::Fixed(int const raw) : fractionalbBits(raw) {
 }
 
 Fixed::Fixed(Fixed const &src) : fractionalbBits(8) {
-    this->setRawBits(0);
     std::cout << "Copy Constructor called" << std::endl;
     *this = src;
-    return;
 }
 
 Fixed::~Fixed() {

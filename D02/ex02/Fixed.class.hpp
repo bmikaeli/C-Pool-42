@@ -15,29 +15,31 @@ public :
 
     Fixed(Fixed const &src);
 
-    ~Fixed(void);
-
-    Fixed &operator/(Fixed const &rhs);
-
-    Fixed &operator*(Fixed const &rhs);
-
-    Fixed &operator+(Fixed const &rhs);
-
-    Fixed &operator-(Fixed const &rhs);
-
     Fixed &operator=(Fixed const &rhs);
 
-    Fixed &operator<(Fixed const &rhs);
+    Fixed &operator++();
 
-    Fixed &operator>(Fixed const &rhs);
+    Fixed operator++(int);
 
-    Fixed &operator>=(Fixed const &rhs);
+    Fixed operator*(Fixed const &rhs) const;
 
-    Fixed &operator<=(Fixed const &rhs);
+    Fixed operator-(Fixed const &rhs) const;
 
-    Fixed &operator==(Fixed const &rhs);
+    Fixed operator/(Fixed const &rhs) const;
 
-    Fixed &operator!=(Fixed const &rhs);
+    Fixed operator+(Fixed const &rhs) const;
+
+    Fixed operator>(Fixed const &rhs) const;
+
+    Fixed operator<(Fixed const &rhs) const;
+
+    Fixed operator>=(Fixed const &rhs) const;
+
+    Fixed operator<=(Fixed const &rhs) const;
+
+    Fixed operator==(Fixed const &rhs) const;
+
+    Fixed operator!=(Fixed const &rhs) const;
 
     float toFloat(void) const;
 
@@ -47,6 +49,8 @@ public :
 
     int getRawBits(void) const;
 
+    ~Fixed(void);
+
 private:
     const int fractionalbBits;
     int rawBits;
@@ -54,5 +58,7 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &o, Fixed const &i);
+Fixed max(Fixed const &a, Fixed const &b);
+Fixed min(Fixed const &a, Fixed const &b);
 
 #endif
