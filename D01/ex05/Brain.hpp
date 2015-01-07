@@ -10,7 +10,7 @@ public:
 
     ~Brain(void);
 
-    std::string identify(void);
+    std::string identify();
 
 private:
     int IQ;

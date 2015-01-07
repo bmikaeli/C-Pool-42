@@ -10,12 +10,13 @@ public:
 
     ~Human(void);
 
+    Brain &getBrain();
+
     std::string identify(void);
 
-    Brain *getBrain();
-
 private:
-    Brain *brain;
+    const Brain brain;
+
 };
 
 #endif

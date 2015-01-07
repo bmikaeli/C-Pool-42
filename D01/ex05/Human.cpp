@@ -1,23 +1,19 @@
 #include "Human.hpp"
+#include "Brain.hpp"
 
-Human::Human(void) {
+Human::Human(void) : brain(*(new Brain)) {
     std::cout << "Human Constructor called" << std::endl;
-    Brain *brain = new Brain();
-    this->brain = brain;
 }
 
 Human::~Human(void) {
 
     std::cout << "Human Destructor called" << std::endl;
-    delete this->brain;
 }
 
 std::string Human::identify() {
-
-    return this->brain->identify();
+    return this->getBrain().identify();
 
 }
-
-Brain *Human::getBrain() {
-    return this->brain;
+Brain &Human::getBrain() {
+    return (Brain &) this->brain;
 }
