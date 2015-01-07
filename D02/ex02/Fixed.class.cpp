@@ -44,7 +44,6 @@ int Fixed::toInt(void) const {
 }
 
 
-
 Fixed &Fixed::operator=(Fixed const &rhs) {
 //    std::cout << "Assignation operator called" << std::endl;
     this->rawBits = rhs.getRawBits();
@@ -64,24 +63,30 @@ Fixed Fixed::operator/(Fixed const &rhs) const {
 }
 
 Fixed Fixed::operator+(Fixed const &rhs) const {
+
     return Fixed(this->toFloat() + rhs.toFloat());
 }
 
 Fixed Fixed::operator>(Fixed const &rhs) const {
     return Fixed(this->toFloat() > rhs.toFloat());
 }
+
 Fixed Fixed::operator<(Fixed const &rhs) const {
     return Fixed(this->toFloat() < rhs.toFloat());
 }
+
 Fixed Fixed::operator>=(Fixed const &rhs) const {
     return Fixed(this->toFloat() >= rhs.toFloat());
 }
+
 Fixed Fixed::operator<=(Fixed const &rhs) const {
     return Fixed(this->toFloat() <= rhs.toFloat());
 }
+
 Fixed Fixed::operator==(Fixed const &rhs) const {
     return Fixed(this->toFloat() == rhs.toFloat());
 }
+
 Fixed Fixed::operator!=(Fixed const &rhs) const {
     return Fixed(this->toFloat() != rhs.toFloat());
 }
@@ -105,8 +110,10 @@ std::ostream &operator<<(std::ostream &o, Fixed const &rhs) {
     o << rhs.toFloat();
     return o;
 }
-Fixed::max!=(Fixed const &rhs) const {
-    r<<(std::ostream &o, Fixed const &rhs) {
-    o << rhs.toFloat();
-    return o;
+
+Fixed Fixed::max(Fixed const &a, Fixed const &b) {
+    if (a.toFloat() > b.toFloat())
+        return a;
+    else
+        return b;
 }

@@ -4,9 +4,10 @@
 #include <iostream>
 #include <cmath>
 
-class Fixed {
 
+class Fixed {
 public :
+
     Fixed(void);
 
     Fixed(int const raw);
@@ -51,6 +52,8 @@ public :
 
     ~Fixed(void);
 
+    static Fixed max(Fixed const &a, Fixed const &b);
+
 private:
     const int fractionalbBits;
     int rawBits;
@@ -58,7 +61,6 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &o, Fixed const &i);
-Fixed max(Fixed const &a, Fixed const &b);
-Fixed min(Fixed const &a, Fixed const &b);
+//static Fixed min(Fixed const &a, Fixed const &b) const;
 
 #endif
