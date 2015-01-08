@@ -1,18 +1,20 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(ScavTrap const &src) : MaxEnergyPoint(100), MaxHitPoint(100) {
+ScavTrap::ScavTrap(ScavTrap const &src) {
     std::cout << "Copy Constructor Called" << std::endl;
     *this = src;
 }
 
-ScavTrap::ScavTrap() : MaxEnergyPoint(100), MaxHitPoint(100) {
+ScavTrap::ScavTrap() {
     std::cout << "Default Constructor Called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string str) : name(str), MaxEnergyPoint(100), MaxHitPoint(100) {
+ScavTrap::ScavTrap(const std::string str) : name(str) {
     std::cout << "String Constructor Called" << std::endl;
     this->HitPoint = 100;
+    this->MaxHitPoint = 100;
     this->EnergyPoint = 50;
+    this->MaxEnergyPoint = 100;
     this->level = 1;
     this->meleeAttackDamage = 20;
     this->rangedAttackDamage = 15;
@@ -41,7 +43,7 @@ void ScavTrap::beRepaired(unsigned int amount) {
             std::cout << "FR4G-TP <" << this->getName() << "> has been resurected" << std::endl;
         }
         std::cout << "FR4G-TP <" << this->getName() << "> is heal by " << amount << "> Hit points" << std::endl;
-        if ((this->getHitPoint() + amount) > this->getMaxHitPoint()) {
+        if ((this->getHitPoint() + (int) amount) > this->getMaxHitPoint()) {
             this->HitPoint = this->getMaxHitPoint();
         }
         else {
@@ -51,12 +53,11 @@ void ScavTrap::beRepaired(unsigned int amount) {
     }
 }
 
-void ScavTrap::challengeNewcomer(const std::string  &target) const
-{
+void ScavTrap::challengeNewcomer(const std::string &target) const {
     std::string randomChallenge[7];
     srand(time(NULL));
 
-    randomChallenge[0] = "I am the best robot. Yeah, yeah, yeah, I am the best robot. Ooh, ooh, here we go!\"";
+    randomChallenge[0] = "I am the best robot. Yeah, yeah, yeah, I am the best robot. Ooh, ooh, here we go!";
     randomChallenge[1] = "Wanna hear a new dubstep song I wrote? Wub! Wub";
     randomChallenge[2] = "Good as new, I think. Am I leaking?";
     randomChallenge[3] = "Please open the box";
@@ -64,7 +65,7 @@ void ScavTrap::challengeNewcomer(const std::string  &target) const
     randomChallenge[5] = "Please don't shoot me, please don't shoot me, please don't shoot me!";
     randomChallenge[6] = "Turning off the optics... they can't see me...";
 
-    std::cout << "<ScavTrap> " << randomChallenge[std::rand() % 6] << std::endl;
+    std::cout << "<ScavTrap> Hey <" << target << ">" << randomChallenge[std::rand() % 6] << std::endl;
 
 }
 
@@ -73,7 +74,7 @@ void ScavTrap::takeDamage(unsigned int amount) {
     if (this->getHitPoint() <= 0)
         std::cout << "this unit is already dead" << std::endl;
     else {
-        if ((this->getHitPoint() < amount)) {
+        if ((this->getHitPoint() < (int) amount)) {
             this->HitPoint = 0;
             std::cout << "FR4G-TP <" << this->getName() << "> is hit by <" << amount + this->getArmorAttackReduction() << "> Hit points " << "(reduced to " << amount << ")" << std::endl;
             std::cout << "FR4G-TP <" << this->getName() << "> This unit is now dead" << std::endl;
@@ -101,7 +102,7 @@ int ScavTrap::getHitPoint() const {
     return HitPoint;
 }
 
-int const ScavTrap::getMaxHitPoint() const {
+int ScavTrap::getMaxHitPoint() const {
     return MaxHitPoint;
 }
 
@@ -109,7 +110,7 @@ int ScavTrap::getEnergyPoint() const {
     return EnergyPoint;
 }
 
-int const ScavTrap::getMaxEnergyPoint() const {
+int ScavTrap::getMaxEnergyPoint() const {
     return MaxEnergyPoint;
 }
 

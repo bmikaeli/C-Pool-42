@@ -7,12 +7,22 @@ FragTrap::FragTrap(FragTrap const &src) : ClapTrap() {
 
 FragTrap::FragTrap() : ClapTrap() {
     std::cout << "Default FragTrap Constructor Called" << std::endl;
+    this->HitPoint = 100;
+    this->MaxHitPoint = 100;
+    this->EnergyPoint = 100;
+    this->MaxEnergyPoint = 100;
+    this->level = 1;
+    this->meleeAttackDamage = 30;
+    this->rangedAttackDamage = 20;
+    this->ArmorAttackReduction = 5;
 }
 
 FragTrap::FragTrap(const std::string str) : ClapTrap(str) {
     std::cout << "String FragTrap Constructor Called" << std::endl;
     this->HitPoint = 100;
+    this->MaxHitPoint = 100;
     this->EnergyPoint = 100;
+    this->MaxEnergyPoint = 100;
     this->level = 1;
     this->meleeAttackDamage = 30;
     this->rangedAttackDamage = 20;

@@ -9,11 +9,12 @@ ScavTrap::ScavTrap() : ClapTrap() {
     std::cout << "Default Scav Constructor Called" << std::endl;
 }
 
-//
 ScavTrap::ScavTrap(const std::string str) : ClapTrap(str) {
     std::cout << "String Scav Constructor Called" << std::endl;
     this->HitPoint = 100;
+    this->MaxHitPoint = 100;
     this->EnergyPoint = 50;
+    this->MaxEnergyPoint = 50;
     this->level = 1;
     this->meleeAttackDamage = 20;
     this->rangedAttackDamage = 15;
@@ -36,7 +37,7 @@ void ScavTrap::challengeNewcomer(const std::string &target) const {
     randomChallenge[5] = "Please don't shoot me, please don't shoot me, please don't shoot me!";
     randomChallenge[6] = "Turning off the optics... they can't see me...";
 
-    std::cout << "<ScavTrap> " << randomChallenge[std::rand() % 6] << std::endl;
+    std::cout << "<ScavTrap> Hey <" << target << ">" << randomChallenge[std::rand() % 6] << std::endl;
 
 }
 

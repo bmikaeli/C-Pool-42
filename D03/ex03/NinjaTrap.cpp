@@ -27,19 +27,22 @@ NinjaTrap::~NinjaTrap() {
 
 void NinjaTrap::ninjaShoebox(const ClapTrap &clap) {
     std::cout << "Hello, i'm a Clap (clap clap clap) !" << std::endl;
+    clap.getName();
 }
 
 void NinjaTrap::ninjaShoebox(const ScavTrap &ninja) {
     std::cout << "Hello, i'm a Scav !" << std::endl;
+    ninja.getName();
 }
 
 void NinjaTrap::ninjaShoebox(const FragTrap &frag) {
     std::cout << "Hello, i'm a Frag !" << std::endl;
+    frag.getName();
 }
 
 void NinjaTrap::ninjaShoebox(const NinjaTrap &scav) {
     std::cout << "Niiiiiiiiinjaaaa !" << std::endl;
-
+    scav.getName();
 }
 
 NinjaTrap &NinjaTrap::operator=(NinjaTrap const &rhs) {

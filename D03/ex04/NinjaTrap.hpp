@@ -7,7 +7,7 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-class NinjaTrap : public ClapTrap {
+class NinjaTrap : public virtual ClapTrap {
 public:
 
     NinjaTrap();
@@ -27,6 +27,13 @@ public:
     void ninjaShoebox(NinjaTrap const &ninja);
 
     void ninjaShoebox(ClapTrap const &clap);
+
+protected :
+    mutable int HitPoint;
+    mutable int MaxHitPoint;
+    mutable int level;
+    mutable int rangedAttackDamage;
+    mutable int ArmorAttackReduction;
 };
 
 #endif

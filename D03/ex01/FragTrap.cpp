@@ -1,19 +1,20 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(FragTrap const &src) : MaxEnergyPoint(100), MaxHitPoint(100) {
+FragTrap::FragTrap(FragTrap const &src) {
     std::cout << "Copy Constructor Called" << std::endl;
-
     *this = src;
 }
 
-FragTrap::FragTrap() : MaxEnergyPoint(100), MaxHitPoint(100) {
+FragTrap::FragTrap() {
     std::cout << "Default Constructor Called" << std::endl;
 }
 
-FragTrap::FragTrap(const std::string str) : name(str), MaxEnergyPoint(100), MaxHitPoint(100) {
+FragTrap::FragTrap(const std::string str) : name(str) {
     std::cout << "String Constructor Called" << std::endl;
     this->HitPoint = 100;
+    this->MaxHitPoint = 100;
     this->EnergyPoint = 100;
+    this->MaxEnergyPoint = 100;
     this->level = 1;
     this->meleeAttackDamage = 30;
     this->rangedAttackDamage = 20;
@@ -42,13 +43,12 @@ void FragTrap::beRepaired(unsigned int amount) {
             std::cout << "FR4G-TP <" << this->getName() << "> has been resurected" << std::endl;
         }
         std::cout << "FR4G-TP <" << this->getName() << "> is heal by " << amount << "> Hit points" << std::endl;
-        if ((this->getHitPoint() + amount) > this->getMaxHitPoint()) {
+        if ((this->getHitPoint() + (int) amount) > this->getMaxHitPoint()) {
             this->HitPoint = this->getMaxHitPoint();
         }
         else {
             this->HitPoint += amount;
         }
-
     }
 }
 
@@ -79,7 +79,7 @@ void FragTrap::takeDamage(unsigned int amount) {
     if (this->getHitPoint() <= 0)
         std::cout << "this unit is already dead" << std::endl;
     else {
-        if ((this->getHitPoint() < amount)) {
+        if ((this->getHitPoint() < (int) amount)) {
             this->HitPoint = 0;
             std::cout << "FR4G-TP <" << this->getName() << "> is hit by <" << amount + this->getArmorAttackReduction() << "> Hit points " << "(reduced to " << amount << ")" << std::endl;
             std::cout << "FR4G-TP <" << this->getName() << "> This unit is now dead" << std::endl;
@@ -107,7 +107,7 @@ int FragTrap::getHitPoint() const {
     return HitPoint;
 }
 
-int const FragTrap::getMaxHitPoint() const {
+int FragTrap::getMaxHitPoint() const {
     return MaxHitPoint;
 }
 
@@ -115,7 +115,7 @@ int FragTrap::getEnergyPoint() const {
     return EnergyPoint;
 }
 
-int const FragTrap::getMaxEnergyPoint() const {
+int FragTrap::getMaxEnergyPoint() const {
     return MaxEnergyPoint;
 }
 

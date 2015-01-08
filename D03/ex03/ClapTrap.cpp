@@ -11,14 +11,6 @@ ClapTrap::ClapTrap() {
 
 ClapTrap::ClapTrap(const std::string str) : name(str) {
     std::cout << "String ClapTrap Constructor Called" << std::endl;
-    this->HitPoint = 100;
-    this->EnergyPoint = 50;
-    this->MaxHitPoint = 100;
-    this->MaxEnergyPoint = 100;
-    this->level = 1;
-    this->meleeAttackDamage = 20;
-    this->rangedAttackDamage = 15;
-    this->ArmorAttackReduction = 3;
 }
 
 ClapTrap::~ClapTrap() {
@@ -43,7 +35,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
             std::cout << "FR4G-TP <" << this->getName() << "> has been resurected" << std::endl;
         }
         std::cout << "FR4G-TP <" << this->getName() << "> is heal by " << amount << "> Hit points" << std::endl;
-        if ((this->getHitPoint() + amount) > this->getMaxHitPoint()) {
+        if ((this->getHitPoint() + (int)amount) > this->getMaxHitPoint()) {
             this->HitPoint = this->getMaxHitPoint();
         }
         else {
@@ -58,7 +50,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
     if (this->getHitPoint() <= 0)
         std::cout << "this unit is already dead" << std::endl;
     else {
-        if ((this->getHitPoint() < amount)) {
+        if ((this->getHitPoint() < (int)amount)) {
             this->HitPoint = 0;
             std::cout << "FR4G-TP <" << this->getName() << "> is hit by <" << amount + this->getArmorAttackReduction() << "> Hit points " << "(reduced to " << amount << ")" << std::endl;
             std::cout << "FR4G-TP <" << this->getName() << "> This unit is now dead" << std::endl;
@@ -86,7 +78,7 @@ int ClapTrap::getHitPoint() const {
     return HitPoint;
 }
 
-int const ClapTrap::getMaxHitPoint() const {
+int ClapTrap::getMaxHitPoint() const {
     return MaxHitPoint;
 }
 
@@ -94,7 +86,7 @@ int ClapTrap::getEnergyPoint() const {
     return EnergyPoint;
 }
 
-int const ClapTrap::getMaxEnergyPoint() const {
+int ClapTrap::getMaxEnergyPoint() const {
     return MaxEnergyPoint;
 }
 

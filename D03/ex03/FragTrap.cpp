@@ -26,7 +26,7 @@ FragTrap::~FragTrap() {
 
 void FragTrap::vaulthunter_dot_exe(const std::string &target) {
 
-    if ((this->getEnergyPoint() - 25) > -0) {
+    if ((this->getEnergyPoint() - 25) > 0) {
         std::string randomAttack[5];
         randomAttack[0] = "Knife";
         randomAttack[1] = "MachineGun";

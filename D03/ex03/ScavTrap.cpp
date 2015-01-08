@@ -36,7 +36,7 @@ void ScavTrap::challengeNewcomer(const std::string &target) const {
     randomChallenge[5] = "Please don't shoot me, please don't shoot me, please don't shoot me!";
     randomChallenge[6] = "Turning off the optics... they can't see me...";
 
-    std::cout << "<ScavTrap> " << randomChallenge[std::rand() % 6] << std::endl;
+    std::cout << "<ScavTrap> Hey <" << target << ">" << randomChallenge[std::rand() % 6] << std::endl;
 
 }
 

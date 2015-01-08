@@ -35,11 +35,11 @@ public:
 
     int getLevel() const;
 
-    int const getMaxEnergyPoint() const;
+    int getMaxEnergyPoint() const;
 
     int getEnergyPoint() const;
 
-    int const getMaxHitPoint() const;
+    int getMaxHitPoint() const;
 
     int getHitPoint() const;
 
@@ -48,9 +48,9 @@ public:
 
 private:
     int HitPoint;
-    const int MaxHitPoint;
+    int MaxHitPoint;
     int EnergyPoint;
-    const int MaxEnergyPoint;
+    int MaxEnergyPoint;
     int level;
     std::string name;
     int meleeAttackDamage;
