@@ -1,6 +1,7 @@
 #include "TacticalMarine.hpp"
 
 TacticalMarine::TacticalMarine() {
+    std::cout << "Tactical Marine ready for battle" << std::endl;
 }
 
 TacticalMarine::~TacticalMarine() {

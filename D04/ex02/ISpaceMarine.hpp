@@ -2,9 +2,11 @@
 #define I_SPACE_MARINE_H
 
 #include <iostream>
+
 class ISpaceMarine {
 public:
-    virtual ~ISpaceMarine() {}
+    virtual ~ISpaceMarine() {
+    }
 
     virtual const ISpaceMarine *clone() const = 0;
 

@@ -21,5 +21,5 @@ void AssaultTerminator::rangedAttack() const {
 }
 
 ISpaceMarine *AssaultTerminator::clone() const {
-//    return ret;
+//    return AssaultTerminator(this);
 }

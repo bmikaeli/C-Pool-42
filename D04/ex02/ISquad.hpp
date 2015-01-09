@@ -6,7 +6,8 @@
 class ISquad {
 public:
 
-    virtual ~ISquad() {}
+    virtual ~ISquad() {
+    }
 
     virtual int getCount() const = 0;
 
