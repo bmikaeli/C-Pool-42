@@ -158,9 +158,7 @@ void WindowRetro::drawAliens() {
         for (int i = 0; i < this->nbAliens; i++) {
             this->aliens[i].draw(this->plate, this->aliens[i].Y, this->aliens[i].X);
             mvwprintw(this->plate, this->aliens[i].Y, this->aliens[i].X, "X");
-            mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X + 1, "X");
-            mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X - 1, "X");
-            mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X, "X");
+            mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X - 1, "XXX");
         }
     }
 }
@@ -195,8 +193,13 @@ void WindowRetro::aliensAttack(int randomNumber) {
 void WindowRetro::Play() {
     int i = 0;
     int direction = 1;
+    int tmp = 0;
+    int startx = 0;
+    int starty = 0;
     while (1) {
         usleep(30000);
+
+        if(nbAliens < 6)
 
         this->checkResize();
         if (this->handleKey(this->user, getch()) == 1) {
@@ -210,9 +213,7 @@ void WindowRetro::Play() {
         this->drawAliens();
         mvwprintw(this->infos, 0, 0, "Infos");
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
-        mvwprintw(this->plate, this->user->Y + 1, this->user->X - 1, "0");
-        mvwprintw(this->plate, this->user->Y + 1, this->user->X + 1, "0");
-        mvwprintw(this->plate, this->user->Y + 1, this->user->X, "0");
+        mvwprintw(this->plate, this->user->Y + 1, this->user->X - 1, "000");
         mvwprintw(this->infos, 1, 2, "lives : ");
         mvwprintw(this->infos, 1, 10, this->user->getLives());
         mvwprintw(this->infos, 1, 25, "Score : ");
