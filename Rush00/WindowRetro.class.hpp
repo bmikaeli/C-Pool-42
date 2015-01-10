@@ -48,6 +48,8 @@ private:
 
     int checkColisions(int x, int y);
 
+    int checkHumanColisions(int x, int y);
+
     int width;
     int height;
     int scoreSize;
