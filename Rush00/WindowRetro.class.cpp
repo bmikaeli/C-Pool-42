@@ -197,7 +197,7 @@ void WindowRetro::Play() {
     int startx = 0;
     int starty = 0;
     while (1) {
-        usleep(30000);
+        usleep(20000);
 
         if(nbAliens < 6)
         {
