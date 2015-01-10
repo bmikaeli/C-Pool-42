@@ -141,6 +141,20 @@ int WindowRetro::checkColisions(int x, int y) {
     return 0;
 }
 
+int WindowRetro::checkHumanColisions(int x, int y) {
+    for (int i = 0; i < this->nbAliens; i++)
+    {
+        if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y))
+        {
+            this->user->score += this->aliens[i].scoreValue;
+            this->deleteAlien(i);
+            return 1;
+        }
+        else
+            return 0;
+    }
+}
+
 void WindowRetro::addBullet(int x, int y, int direction) {
 
     Bullet *newone = new Bullet[this->nbBullets + 1];
@@ -209,6 +223,9 @@ void WindowRetro::Play() {
                     this->addAliens(2, 2, 1, 150);
             }
         }
+        int z = this->checkHumanColisions(this->user->X, this->user->Y);
+        if(z == 1)
+            break ;
         this->checkResize();
         if (this->handleKey(this->user, getch()) == 1) {
             break;
