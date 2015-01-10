@@ -40,13 +40,13 @@ private:
 
     void drawBorders(WINDOW *screen);
 
-    void drawBullets();
+    int drawBullets();
 
     void addBullet(int x, int y, int direction);
 
     void checkResize();
 
-    void checkColisions(int x, int y);
+    int checkColisions(int x, int y);
 
     int width;
     int height;

@@ -64,19 +64,29 @@ void WindowRetro::checkResize(void) {
     }
 }
 
-void WindowRetro::drawBullets() {
+int WindowRetro::drawBullets() {
     if (this->nbBullets >= 1) {
         for (int i = 0; i < this->nbBullets; i++) {
             if (this->bullets[i].Y >= 0) {
                 this->bullets[i].Y -= this->bullets[i].direction;
                 mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "|");
-                this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
+                int colision = this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
+                if (colision) {
+                    if (colision == 1) {
+                        return 1;
+
+                    }
+                    else if (colision == 2) {
+                        this->deleteBullets(i);
+                    }
+                }
             }
             else {
                 this->deleteBullets(i);
             }
         }
     }
+    return 0;
 }
 
 void WindowRetro::deleteAlien(int alienIndex) {
@@ -109,15 +119,25 @@ void WindowRetro::deleteBullets(int bulletIndex) {
     this->bullets = newone;
 }
 
-void WindowRetro::checkColisions(int x, int y) {
+int WindowRetro::checkColisions(int x, int y) {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
             if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
                 this->user->score += this->aliens[i].scoreValue;
                 this->deleteAlien(i);
+                return 2;
             }
         }
     }
+    if ((this->user->X == x && this->user->Y == y) || (this->user->X - 1 == x && this->user->Y == y) || (this->user->X + 1 == x && this->user->Y == y)) {
+        {
+            this->user->lives -= 1;
+            if (this->user->lives < 0) {
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
 
 void WindowRetro::addBullet(int x, int y, int direction) {
@@ -182,19 +202,21 @@ void WindowRetro::Play() {
         if (this->handleKey(this->user, getch()) == 1) {
             break;
         }
+        if (this->drawBullets() == 1) {
+            break;
+        }
         this->drawBorders(this->plate);
         this->drawBorders(this->infos);
-        this->drawBullets();
         this->drawAliens();
         mvwprintw(this->infos, 0, 0, "Infos");
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
         mvwprintw(this->plate, this->user->Y + 1, this->user->X - 1, "0");
         mvwprintw(this->plate, this->user->Y + 1, this->user->X + 1, "0");
         mvwprintw(this->plate, this->user->Y + 1, this->user->X, "0");
-        mvwprintw(this->infos, 1, 2, "HP restant : ");
-        mvwprintw(this->infos, 1, 14, "100");
+        mvwprintw(this->infos, 1, 2, "lives : ");
+        mvwprintw(this->infos, 1, 10, this->user->getLives());
         mvwprintw(this->infos, 1, 25, "Score : ");
-        mvwprintw(this->infos, 1, 32, "0");
+        mvwprintw(this->infos, 1, 32, this->user->getScore());
         mvwprintw(this->infos, 1, 45, "Weapon :");
         mvwprintw(this->infos, 1, 55, "Rocket Launcher");
 

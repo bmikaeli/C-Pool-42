@@ -3,6 +3,9 @@
 
 #include "AAlien.class.hpp"
 #include "Aweapon.class.hpp"
+#include <sstream>
+#include <iostream>
+
 
 class User {
 public:
@@ -18,6 +21,10 @@ public:
 
     int hp;
     int X;
+
+    const char *getLives();
+
+    const char *getScore();
     int Y;
     int score;
     int lives;

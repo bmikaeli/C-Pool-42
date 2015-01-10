@@ -1,14 +1,26 @@
 #include "WindowRetro.class.hpp"
 
 int main() {
-    WindowRetro *win = new WindowRetro();
-    win->addAliens(5, 2, 1, 150);
-    win->addAliens(20, 2, 1, 200);
-    win->addAliens(35, 2, 1, 300);
-    win->addAliens(50, 2, 1, 300);
-    win->addAliens(65, 2, 1, 300);
-    win->Play();
-    delete win;
-    return (0);
+    std::string input;
+
+
+    while (1) {
+        std::cout << "Game Over." << std::endl << "Play again ? [Y/N]" << std::endl;
+        std::cin >> input;
+        if (input == "Y") {
+            WindowRetro *win = new WindowRetro();
+            win->addAliens(5, 2, 1, 150);
+            win->addAliens(20, 2, 1, 200);
+            win->addAliens(35, 2, 1, 300);
+            win->addAliens(50, 2, 1, 300);
+            win->addAliens(65, 2, 1, 300);
+            win->Play();
+            delete win;
+        }
+        else {
+            break;
+        }
+    }
+    return 0;
 }
 

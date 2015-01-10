@@ -17,5 +17,22 @@ User::User() {
     this->Y = 1;
     this->hp = 100;
     this->lives = 3;
-    std::cout << "User constructed" << std::endl;
+}
+
+const char *User::getLives() {
+    std::string s;
+    std::stringstream out;
+    out << this->lives;
+    s = out.str();
+    const char *cstr = s.c_str();
+    return cstr;
+}
+
+const char *User::getScore() {
+    std::string s;
+    std::stringstream out;
+    out << this->score;
+    s = out.str();
+    const char *cstr = s.c_str();
+    return cstr;
 }
