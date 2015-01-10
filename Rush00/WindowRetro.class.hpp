@@ -29,6 +29,8 @@ private:
 
     void deleteAlien(int i);
 
+    void deleteBullets(int i);
+
     void drawAliens();
 
     void moveAliens();

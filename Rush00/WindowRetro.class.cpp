@@ -72,6 +72,9 @@ void WindowRetro::drawBullets() {
                 mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "|");
                 this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
             }
+            else {
+                this->deleteBullets(i);
+            }
         }
     }
 }
@@ -89,6 +92,21 @@ void WindowRetro::deleteAlien(int alienIndex) {
     }
     this->nbAliens--;
     this->aliens = newaliens;
+}
+
+void WindowRetro::deleteBullets(int bulletIndex) {
+    Bullet *newone = new Bullet[this->nbBullets - 1];
+    int i = 0;
+    int j = 0;
+    while (i < this->nbBullets) {
+        if (i != bulletIndex) {
+            newone[j] = this->bullets[i];
+            j++;
+        }
+        i++;
+    }
+    this->nbBullets--;
+    this->bullets = newone;
 }
 
 void WindowRetro::checkColisions(int x, int y) {
