@@ -5,11 +5,9 @@ void AAlien::takeDamage(int amount) {
 }
 
 AAlien::AAlien() {
-    std::cout << "A alien abstract has appared" << std::endl;
 }
 
 AAlien::~AAlien() {
-    std::cout << "A alien abstract hase disapread" << std::endl;
 }
 
 void AAlien::draw(WINDOW *plate, int Y, int x) const {

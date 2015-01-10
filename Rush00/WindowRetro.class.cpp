@@ -92,7 +92,6 @@ void WindowRetro::deleteAlien(int alienIndex) {
 }
 
 void WindowRetro::checkColisions(int x, int y) {
-
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
             if (this->aliens[i].X == x && this->aliens[i].Y == y) {
