@@ -10,6 +10,8 @@
 #include "AAlien.class.hpp"
 #include "Bullet.Weapon.class.hpp"
 #include <cstdlib>
+#include "Laser.Weapon.class.hpp"
+#include "RocketLauncher.Weapon.class.hpp"
 #include "Stupid.Alien.class.hpp"
 
 class WindowRetro {

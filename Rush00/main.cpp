@@ -14,6 +14,7 @@ int main() {
             win->addAliens(35, 2, 1, 300);
             win->addAliens(50, 2, 1, 300);
             win->addAliens(65, 2, 1, 300);
+
             win->Play();
             delete win;
         }

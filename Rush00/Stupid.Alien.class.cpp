@@ -5,13 +5,10 @@ Stupid::Stupid(int x, int y, int direction, int scoreValue) {
     this->Y = y;
     this->scoreValue = scoreValue;
     this->direction = direction;
-    std::cout << "Stupid alien is appeared" << std::endl;
 }
 
 Stupid::Stupid() {
-    std::cout << "Stupid alien is appeared" << std::endl;
 }
 
 Stupid::~Stupid() {
-    std::cout << "Stupid alien is dead" << std::endl;
 }

@@ -41,6 +41,8 @@ int WindowRetro::handleKey(User *user, int key) {
             return 1;
         case ' ':
             this->addBullet(this->user->X, this->user->Y, 1);
+        case KEY_PPAGE:
+            this->user->changeWeapon();
         default:
             break;
     }
@@ -74,7 +76,6 @@ int WindowRetro::drawBullets() {
                 if (colision) {
                     if (colision == 1) {
                         return 1;
-
                     }
                     else if (colision == 2) {
                         this->deleteBullets(i);
@@ -199,12 +200,10 @@ void WindowRetro::Play() {
     while (1) {
         usleep(20000);
 
-        if(nbAliens < 6)
-        {
+        if (nbAliens < 6) {
             int tmp = 6 - nbAliens;
-            for(int g = 0; g < tmp; g++)
-            {
-                if(this->aliens[nbAliens].X < 4)
+            for (int g = 0; g < tmp; g++) {
+                if (this->aliens[nbAliens].X < 4)
                     this->addAliens(12, 4, 1, 150);
                 else
                     this->addAliens(2, 2, 1, 150);
@@ -229,7 +228,6 @@ void WindowRetro::Play() {
         mvwprintw(this->infos, 1, 32, this->user->getScore());
         mvwprintw(this->infos, 1, 45, "Weapon :");
         mvwprintw(this->infos, 1, 55, "Rocket Launcher");
-
 
         if (i % 10 == 0) {
             this->moveAliens();
@@ -263,6 +261,9 @@ WindowRetro::WindowRetro() {
     this->nbAliens = 0;
     this->user = new User();
     this->user->X = 50;
+    this->user->Y = 10;
+    RockerLauncher a;
+    this->user->addWeapon(a);
 
     initscr();
     start_color();
