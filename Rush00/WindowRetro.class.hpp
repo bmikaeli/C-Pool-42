@@ -1,5 +1,6 @@
 #ifndef WindowRetro_CLASS_H
 #define WindowRetro_CLASS_H
+
 #include <iostream>
 #include <stdlib.h>
 #include <curses.h>
@@ -11,16 +12,30 @@
 class WindowRetro {
 public:
     WindowRetro();
+
     WindowRetro(int width, int height);
+
     ~WindowRetro();
-    void handleKey(User * user, int key);
+
+    void handleKey(User *user, int key);
+
 private:
     int width;
     int height;
     int scoreSize;
-    User * user;
-    AAlien * alien;
+    User *user;
+    AAlien *alien;
+
     void checkResize();
 
+    WINDOW *plate;
+    WINDOW *infos;
+
+    void fire();
+
+    void drawBorders(WINDOW *screen);
+
+    void Play();
 };
+
 #endif

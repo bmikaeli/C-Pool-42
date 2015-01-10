@@ -1,19 +1,26 @@
 #ifndef USER_CLASS_H
 #define USER_CLASS_H
+
 #include "AAlien.class.hpp"
 #include "Aweapon.class.hpp"
-class User{
+
+class User {
 public:
     User();
+
     ~User();
+
     void takeDamage(int amount);
-    void attack(AAlien & target);
-    Aweapon * getWeapon() const;
+
+    void attack(AAlien &target);
+
+    Aweapon *getWeapon() const;
 
     int hp;
     int X;
     int Y;
     int lives;
-    Aweapon * weapon;
+    Aweapon *weapon;
 };
+
 #endif

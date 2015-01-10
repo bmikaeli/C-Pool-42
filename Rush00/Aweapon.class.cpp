@@ -1,4 +1,5 @@
 #include "Aweapon.class.hpp"
+
 int Aweapon::getDamage() {
     return this->damage;
 }

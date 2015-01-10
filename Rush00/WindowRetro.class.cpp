@@ -1,47 +1,48 @@
 #include "WindowRetro.class.hpp"
 #include <unistd.h>
 
-WindowRetro::WindowRetro() : width(500), height(500){
+WindowRetro::WindowRetro() : width(500), height(500) {
 }
 
-void draw_borders(WINDOW *screen) {
-    int x, y, i;
+void WindowRetro::drawBorders(WINDOW * screen) {
+    int x = this->width;
+    int y = this->height;
+    int i = 0;
     getmaxyx(screen, y, x);
-    // 4 corners
     mvwprintw(screen, 0, 0, "+");
     mvwprintw(screen, y - 1, 0, "+");
     mvwprintw(screen, 0, x - 1, "+");
     mvwprintw(screen, y - 1, x - 1, "+");
-    // sides
     for (i = 1; i < (y - 1); i++) {
         mvwprintw(screen, i, 0, "|");
         mvwprintw(screen, i, x - 1, "|");
     }
-    // top and bottom
     for (i = 1; i < (x - 1); i++) {
         mvwprintw(screen, 0, i, "-");
         mvwprintw(screen, y - 1, i, "-");
     }
 }
-void WindowRetro::handleKey(User * user, int key) {
-    switch (key)
-    {
+
+void WindowRetro::handleKey(User *user, int key) {
+    switch (key) {
         case KEY_RIGHT:
-            if(user->X < this->width - 2)
+            if (user->X < this->width - 2)
                 user->X++;
             break;
         case KEY_LEFT:
-            if(user->X >  1)
+            if (user->X > 1)
                 user->X--;
             break;
         case KEY_UP:
-            if(user->Y > 1)
+            if (user->Y > 1)
                 user->Y--;
             break;
         case KEY_DOWN:
-            if(user->Y < this->height - 1 - this->scoreSize)
+            if (user->Y < this->height - 2 - this->scoreSize)
                 user->Y++;
             break;
+        case KEY_BACKSPACE:
+            this->fire();
         default:
             break;
     }
@@ -56,78 +57,81 @@ void WindowRetro::checkResize(void) {
     if (new_y != this->height || new_x != this->width) {
         this->width = new_x;
         this->height = new_y;
-        wresize(field, new_y - this->score_size, new_x);
-        wresize(score, this->score_size, new_x);
-        mvwin(score, new_y - this->score_size, 0);
+        wresize(this->plate, new_y - this->scoreSize, new_x);
+        wresize(this->infos, this->scoreSize, new_x);
+        mvwin(this->infos, new_y - this->scoreSize, 0);
         wclear(stdscr);
-        wclear(field);
-        wclear(score);
-        draw_borders(field);
-        draw_borders(score);
+        wclear(this->plate);
+        wclear(this->infos);
+        this->drawBorders(this->plate);
+        this->drawBorders(this->infos);
     }
 }
 
-WindowRetro::WindowRetro(int width, int height) : width(width), height(height){
+void WindowRetro::fire() {
+    int y = this->user->Y;
+//    usleep(5000000);
+    while(y-- >= 0)
+    {
+//        usleep(5000);
+        wclear(this->plate);
+        mvwprintw(this->plate, y, this->user->X, "I");
+        wrefresh(this->plate);
+    }
+}
+
+void WindowRetro::Play() {
+    int i = 0;
+    int direction = 1;
+    while (1) {
+        usleep(3000);
+        this->checkResize();
+        this->handleKey(this->user, getch());
+        wclear(this->plate);
+        this->drawBorders(this->plate);
+
+        mvwprintw(this->infos, 0, 0, "Infos");
+        mvwprintw(this->plate, alien->Y, alien->X, "X");
+        mvwprintw(this->plate, this->user->Y, this->user->X, "0");
+        mvwprintw(this->infos, 1, 5, "HP restant : ");
+        mvwprintw(this->infos, 1, 18, "100");
+        wrefresh(this->plate);
+        wrefresh(this->infos);
+
+        if (i % 10 == 0) {
+            if (alien->X >= this->width) {
+                alien->Y++;
+                direction = -1;
+            }
+            if (alien->X <= 1) {
+                direction = 1;
+                alien->Y++;
+            }
+            alien->X += direction;
+        }
+        i++;
+    }
+}
+
+WindowRetro::WindowRetro(int width, int height) : width(width), height(height), scoreSize(3) {
     std::cout << "New Window Created" << std::endl;
     this->user = new User();
     this->alien = new Stupid();
-    int parent_x, parent_y, new_x, new_y;
-    int score_size = 3;
+
     initscr();
     start_color();
     curs_set(FALSE);
     nodelay(stdscr, TRUE);
     keypad(stdscr, TRUE);
 
-    WINDOW *field = newwin(parent_y - score_size, parent_x, 0, 0);
-    WINDOW *score = newwin(score_size, parent_x, parent_y - score_size, 0);
-    draw_borders(field);
-    draw_borders(score);
-    int x = parent_x /2;
-    int y = parent_y / 2;
-    alien->X = 10;
-    alien->Y = 2;
-    int i = 0;
-    int direction = 1;
-    while(1)
-    {
-        usleep(3000);
-        getmaxyx(stdscr, new_y, new_x);
-        this->checkResize();
+    this->plate = newwin(this->height - this->scoreSize, this->width, 0, 0);
+    this->infos = newwin(this->scoreSize, this->width, this->height - this->scoreSize, 0);
+    alien->X = 0;
+    alien->Y = 0;
 
-        this->handleKey(this->user, getch());
-        wclear(field);
-        draw_borders(field);
-        draw_borders(score);
-
-        refresh();
-        mvwprintw(score, 0, 0, "Infos");
-        mvwprintw(field, alien->Y, alien->X, "X");
-        mvwprintw(field, y, x, "0");
-        mvwprintw(score, 1, 5, "HP restant : ");
-        mvwprintw(score, 1, 18, "100");
-        wrefresh(field);
-        wrefresh(score);
-        refresh();
-
-        if(i % 10 == 0)
-        {
-            if(alien->X >= new_x) {
-                alien->Y++;
-                direction = -1;
-            }
-            if (alien->X <= 1)
-            {
-                direction = 1;
-                alien->Y++;
-            }
-            alien->X += direction;
-        }
-
-        i++;
-    }
-    delwin(field);
-    delwin(score);
+    this->Play();
+    delwin(this->plate);
+    delwin(this->infos);
 }
 
 WindowRetro::~WindowRetro() {

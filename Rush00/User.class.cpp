@@ -1,11 +1,14 @@
 #include "User.class.hpp"
+
 void User::takeDamage(int amount) {
     this->hp -= amount;
 }
-void User::attack(AAlien & target) {
+
+void User::attack(AAlien &target) {
     target.takeDamage(this->weapon->getDamage());
 }
-Aweapon* User::getWeapon() const {
+
+Aweapon *User::getWeapon() const {
     return this->weapon;
 }
 
