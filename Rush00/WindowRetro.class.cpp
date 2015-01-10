@@ -1,10 +1,7 @@
 #include "WindowRetro.class.hpp"
 #include <unistd.h>
 
-WindowRetro::WindowRetro() : width(500), height(500) {
-}
-
-void WindowRetro::drawBorders(WINDOW * screen) {
+void WindowRetro::drawBorders(WINDOW *screen) {
     int x = this->width;
     int y = this->height;
     int i = 0;
@@ -23,7 +20,7 @@ void WindowRetro::drawBorders(WINDOW * screen) {
     }
 }
 
-void WindowRetro::handleKey(User *user, int key) {
+int WindowRetro::handleKey(User *user, int key) {
     switch (key) {
         case KEY_RIGHT:
             if (user->X < this->width - 2)
@@ -41,7 +38,10 @@ void WindowRetro::handleKey(User *user, int key) {
             if (user->Y < this->height - 2 - this->scoreSize)
                 user->Y++;
             break;
-        case KEY_BACKSPACE:
+        case KEY_NPAGE:
+            return 1;
+            break;
+        case ' ':
             this->addBullet(this->user->X, this->user->Y, 1);
         default:
             break;
@@ -147,31 +147,34 @@ void WindowRetro::moveAliens() {
 
 void WindowRetro::Play() {
     int i = 0;
-
     int direction = 1;
     while (1) {
         usleep(30000);
+
         this->checkResize();
-        this->handleKey(this->user, getch());
-
+        if (this->handleKey(this->user, getch()) == 1) {
+            break;
+        }
         this->drawBorders(this->plate);
+        this->drawBorders(this->infos);
         this->drawBullets();
-
-        mvwprintw(this->infos, 0, 0, "Infos");
         this->drawAliens();
 
+        mvwprintw(this->infos, 0, 0, "Infos");
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
         mvwprintw(this->infos, 1, 5, "HP restant : ");
         mvwprintw(this->infos, 1, 18, "100");
+        mvwprintw(this->infos, 1, 50, "Score : ");
+        mvwprintw(this->infos, 1, 60, "0");
 
         if (i % 10 == 0) {
             this->moveAliens();
         }
         wrefresh(this->infos);
-        i++;
         wrefresh(this->plate);
         wclear(this->plate);
         wclear(this->infos);
+        i++;
     }
 }
 
@@ -187,15 +190,14 @@ void WindowRetro::addAliens(int x, int y, int direction, int scoreValue) {
     this->aliens = newaliens;
 }
 
-WindowRetro::WindowRetro(int width, int height) : width(width), height(height), scoreSize(3) {
+WindowRetro::WindowRetro() {
+    this->scoreSize = 3;
+    this->height = 600;
+    this->width = 300;
     this->nbBullets = 0;
     this->nbAliens = 0;
-    std::cout << "New Window Created" << std::endl;
     this->user = new User();
     this->user->X = 50;
-    this->addAliens(20, 2, 1, 200);
-    this->addAliens(5, 2, 1, 150);
-    this->addAliens(10, 2, 1, 300);
 
     initscr();
     start_color();
@@ -205,13 +207,10 @@ WindowRetro::WindowRetro(int width, int height) : width(width), height(height), 
 
     this->plate = newwin(this->height - this->scoreSize, this->width, 0, 0);
     this->infos = newwin(this->scoreSize, this->width, this->height - this->scoreSize, 0);
-
-    this->Play();
-    delwin(this->plate);
-    delwin(this->infos);
 }
 
 WindowRetro::~WindowRetro() {
+    delwin(this->plate);
+    delwin(this->infos);
     endwin();
-    std::cout << "New Window Destroyed" << std::endl;
 }

@@ -14,13 +14,16 @@ class WindowRetro {
 public:
     WindowRetro();
 
-    WindowRetro(int width, int height);
-
     ~WindowRetro();
 
-    void handleKey(User *user, int key);
+    int handleKey(User *user, int key);
+
+    void addAliens(int x, int y, int direction, int scoreValue);
+
+    void Play();
 
 private:
+
     void fire();
 
     void deleteAlien(int i);
@@ -29,11 +32,7 @@ private:
 
     void moveAliens();
 
-    void addAliens(int x, int y, int direction, int scoreValue);
-
     void drawBorders(WINDOW *screen);
-
-    void Play();
 
     void drawBullets();
 
