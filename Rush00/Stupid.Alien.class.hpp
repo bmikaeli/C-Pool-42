@@ -11,6 +11,7 @@ public:
 
     ~Stupid();
 
+    void draw();
 };
 
 #endif

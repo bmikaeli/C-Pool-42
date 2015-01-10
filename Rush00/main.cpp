@@ -1,5 +1,3 @@
-#include "User.class.hpp"
-#include "SpaceInvader.hpp"
 #include "WindowRetro.class.hpp"
 
 int main() {

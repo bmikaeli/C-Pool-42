@@ -6,6 +6,7 @@
 #include <curses.h>
 #include <signal.h>
 #include "User.class.hpp"
+#include <unistd.h>
 #include "AAlien.class.hpp"
 #include "Bullet.Weapon.class.hpp"
 #include "Stupid.Alien.class.hpp"

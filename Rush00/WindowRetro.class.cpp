@@ -1,5 +1,4 @@
 #include "WindowRetro.class.hpp"
-#include <unistd.h>
 
 void WindowRetro::drawBorders(WINDOW *screen) {
     int x = this->width;
@@ -40,7 +39,6 @@ int WindowRetro::handleKey(User *user, int key) {
             break;
         case KEY_NPAGE:
             return 1;
-            break;
         case ' ':
             this->addBullet(this->user->X, this->user->Y, 1);
         default:
@@ -121,6 +119,7 @@ void WindowRetro::addBullet(int x, int y, int direction) {
 void WindowRetro::drawAliens() {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
+            this->aliens[i].draw(this->plate, this->aliens[i].Y, this->aliens[i].X);
             mvwprintw(this->plate, this->aliens[i].Y, this->aliens[i].X, "X");
             mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X + 1, "X");
             mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X - 1, "X");
@@ -162,10 +161,13 @@ void WindowRetro::Play() {
 
         mvwprintw(this->infos, 0, 0, "Infos");
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
-        mvwprintw(this->infos, 1, 5, "HP restant : ");
-        mvwprintw(this->infos, 1, 18, "100");
-        mvwprintw(this->infos, 1, 50, "Score : ");
-        mvwprintw(this->infos, 1, 60, "0");
+        mvwprintw(this->infos, 1, 2, "HP restant : ");
+        mvwprintw(this->infos, 1, 14, "100");
+        mvwprintw(this->infos, 1, 25, "Score : ");
+        mvwprintw(this->infos, 1, 32, "0");
+        mvwprintw(this->infos, 1, 45, "Weapon :");
+        mvwprintw(this->infos, 1, 55, "Rocket Launcher");
+
 
         if (i % 10 == 0) {
             this->moveAliens();
