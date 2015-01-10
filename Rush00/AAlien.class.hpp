@@ -12,7 +12,9 @@ public:
     ~AAlien();
 
     int hp;
+    int scoreValue;
     int X;
+    int direction;
     int Y;
 };
 

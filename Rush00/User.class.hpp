@@ -19,6 +19,7 @@ public:
     int hp;
     int X;
     int Y;
+    int score;
     int lives;
     Aweapon *weapon;
 };

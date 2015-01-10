@@ -7,6 +7,8 @@ class Stupid : public AAlien {
 public:
     Stupid();
 
+    Stupid(int x, int y, int direction, int score);
+
     ~Stupid();
 
 };
