@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include "AAlien.class.hpp"
 #include "Bullet.Weapon.class.hpp"
+#include <cstdlib>
 #include "Stupid.Alien.class.hpp"
 
 class WindowRetro {
@@ -26,6 +27,8 @@ public:
 private:
 
     void fire();
+
+    void aliensAttack(int random);
 
     void deleteAlien(int i);
 

@@ -26,15 +26,15 @@ int WindowRetro::handleKey(User *user, int key) {
                 user->X++;
             break;
         case KEY_LEFT:
-            if (user->X > 1)
+            if (user->X > 2)
                 user->X--;
             break;
         case KEY_UP:
-            if (user->Y > 1)
+            if (user->Y > this->height / 2)
                 user->Y--;
             break;
         case KEY_DOWN:
-            if (user->Y < this->height - 2 - this->scoreSize)
+            if (user->Y < this->height - 3 - this->scoreSize)
                 user->Y++;
             break;
         case KEY_NPAGE:
@@ -68,7 +68,7 @@ void WindowRetro::drawBullets() {
     if (this->nbBullets >= 1) {
         for (int i = 0; i < this->nbBullets; i++) {
             if (this->bullets[i].Y >= 0) {
-                this->bullets[i].Y--;
+                this->bullets[i].Y -= this->bullets[i].direction;
                 mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "|");
                 this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
             }
@@ -112,7 +112,7 @@ void WindowRetro::deleteBullets(int bulletIndex) {
 void WindowRetro::checkColisions(int x, int y) {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
-            if (this->aliens[i].Y == y && (this->aliens[i].X == x || this->aliens[i].X - 1 == x || this->aliens[i].X + 1)) {
+            if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
                 this->user->score += this->aliens[i].scoreValue;
                 this->deleteAlien(i);
             }
@@ -148,15 +148,26 @@ void WindowRetro::drawAliens() {
 void WindowRetro::moveAliens() {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
-            if (aliens[i].X >= this->width) {
-                aliens[i].Y++;
+            if (aliens[i].X >= this->width - 2) {
+                aliens[i].Y += 2;
                 aliens[i].direction = -1;
             }
-            if (aliens[i].X <= 1) {
+            if (aliens[i].X <= 2) {
                 aliens[i].direction = 1;
-                aliens[i].Y++;
+                aliens[i].Y += 2;
             }
             aliens[i].X += aliens[i].direction;
+        }
+    }
+}
+
+void WindowRetro::aliensAttack(int randomNumber) {
+    std::srand(time(NULL));
+    if (this->nbAliens >= 1) {
+        for (int i = 0; i < this->nbAliens; i++) {
+            if ((randomNumber + i * 11 + rand()) % 50 == 0) {
+                this->addBullet(this->aliens[i].X, this->aliens[i].Y, -1);
+            }
         }
     }
 }
@@ -175,9 +186,11 @@ void WindowRetro::Play() {
         this->drawBorders(this->infos);
         this->drawBullets();
         this->drawAliens();
-
         mvwprintw(this->infos, 0, 0, "Infos");
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
+        mvwprintw(this->plate, this->user->Y + 1, this->user->X - 1, "0");
+        mvwprintw(this->plate, this->user->Y + 1, this->user->X + 1, "0");
+        mvwprintw(this->plate, this->user->Y + 1, this->user->X, "0");
         mvwprintw(this->infos, 1, 2, "HP restant : ");
         mvwprintw(this->infos, 1, 14, "100");
         mvwprintw(this->infos, 1, 25, "Score : ");
@@ -189,6 +202,7 @@ void WindowRetro::Play() {
         if (i % 10 == 0) {
             this->moveAliens();
         }
+        this->aliensAttack(i);
         wrefresh(this->infos);
         wrefresh(this->plate);
         wclear(this->plate);
