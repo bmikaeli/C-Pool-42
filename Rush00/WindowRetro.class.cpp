@@ -95,7 +95,7 @@ void WindowRetro::checkColisions(int x, int y) {
 
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
-            if (this->aliens[i].X == x && this->aliens[i].Y == y) {
+            if ((this->aliens[i].X == x && this->aliens[i].Y == y ) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
                 this->user->score += this->aliens[i].scoreValue;
                 this->deleteAlien(i);
             }
