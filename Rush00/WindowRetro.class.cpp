@@ -241,16 +241,9 @@ void WindowRetro::Play() {
 
         usleep(20000);
 
-        if (nbAliens < 6) {
-            int tmp = 6 - nbAliens;
-            for (int g = 0; g < tmp; g++) {
-                if (this->aliens[nbAliens].X < 4) {
-                    this->addAliens(12, 2, 1, 150);
-                }
-                else {
-                    this->addAliens(2, 2, 1, 150);
-                }
-            }
+        if (nbAliens == 0) {
+            this->user->win = 1;
+            break;
         }
         int z = this->checkHumanColisions(this->user->X, this->user->Y);
         if (z == 2) {
