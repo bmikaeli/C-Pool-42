@@ -7,7 +7,7 @@ int main() {
     while (1) {
         std::cout << "Game Over." << std::endl << "Play again ? [Y/N]" << std::endl;
         std::cin >> input;
-        if (input == "Y") {
+        if (input == "Y" || input == "y") {
             WindowRetro *win = new WindowRetro();
             win->addAliens(5, 2, 1, 150);
             win->addAliens(20, 2, 1, 200);
@@ -18,7 +18,7 @@ int main() {
             win->Play();
             delete win;
         }
-        else {
+        else if (input == "N" || input == "n") {
             break;
         }
     }
