@@ -30,9 +30,9 @@ int WindowRetro::handleKey(User *user, int key) {
                 user->X--;
             break;
         case KEY_UP:
-            if (user->Y > this->height / 2) {
+            //if (user->Y > this->height / 2) {
                 user->Y--;
-            }
+            //}
             break;
         case KEY_DOWN:
             if (user->Y < this->height - 3 - this->scoreSize) {
@@ -159,8 +159,6 @@ int WindowRetro::checkHumanColisions(int x, int y) {
             this->deleteAlien(i);
             return 2;
         }
-        else
-            return 0;
     }
     return 0;
 }
@@ -279,13 +277,13 @@ WindowRetro::WindowRetro() {
     this->scoreSize = 3;
     this->height = 600;
     this->width = 300;
-    //if(this->user->score != 0)
-        //this->user->score = 0;
     this->nbBullets = 0;
     this->nbAliens = 0;
     this->user = new User();
     this->user->X = 50;
     this->user->Y = 10;
+    //if(this->user->score != 0)
+        //this->user->score = 0;
     RocketLauncher a;
     Laser b;
 

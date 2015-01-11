@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <curses.h>
 #include <signal.h>
+#include <string>
 #include "User.class.hpp"
 #include <unistd.h>
 #include "AAlien.class.hpp"
