@@ -227,6 +227,7 @@ void WindowRetro::aliensAttack(int randomNumber) {
 
 void WindowRetro::Play() {
     int i = 0;
+    int j = 0;
     this->checkResize();
     this->user->X = this->width / 2;
     this->user->Y = this->height / 4 * 3;
@@ -235,8 +236,14 @@ void WindowRetro::Play() {
         usleep(20000);
 
         if (nbAliens == 0) {
-            this->user->win = 1;
-            break;
+            if(j == 1)
+            {
+                this->user->win = 1;
+                break;
+            }
+            Boss boss(12, 2, 1, 40);
+            j = 1;
+            this->addBoss(boss);
         }
         int z = this->checkHumanColisions(this->user->X, this->user->Y);
         if (z == 2) {
