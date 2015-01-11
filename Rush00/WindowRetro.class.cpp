@@ -301,6 +301,17 @@ void WindowRetro::addAliens(int x, int y, int direction, int scoreValue) {
     this->nbAliens++;
     this->aliens = newaliens;
 }
+void WindowRetro::addBoss(int x, int y, int direction, int scoreValue) {
+    AAlien *newaliens = new AAlien[this->nbAliens + 1];
+    int i = 0;
+    while (i < this->nbAliens) {
+        newaliens[i] = this->aliens[i];
+        i++;
+    }
+    newaliens[i] = Boss(x, y, direction, scoreValue);
+    this->nbAliens++;
+    this->aliens = newaliens;
+}
 
 WindowRetro::WindowRetro() {
     this->scoreSize = 3;

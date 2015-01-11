@@ -4,6 +4,7 @@ SRC = main.cpp \
     Aweapon.class.cpp \
     Bullet.Weapon.class.cpp\
     Stupid.Alien.class.cpp\
+    Boss.Alien.class.cpp\
     User.class.cpp \
     RocketLauncher.Weapon.class.cpp \
     Laser.Weapon.class.cpp \

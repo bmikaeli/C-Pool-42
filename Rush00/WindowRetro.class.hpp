@@ -14,6 +14,7 @@
 #include "Laser.Weapon.class.hpp"
 #include "RocketLauncher.Weapon.class.hpp"
 #include "Stupid.Alien.class.hpp"
+#include "Boss.Alien.class.hpp"
 
 class WindowRetro {
 public:
@@ -24,6 +25,8 @@ public:
     int handleKey(User *user, int key);
 
     void addAliens(int x, int y, int direction, int scoreValue);
+
+    void addBoss(int x, int y, int direction, int scoreValue);
 
     void Play();
 
