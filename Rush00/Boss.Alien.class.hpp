@@ -1,6 +1,7 @@
 #ifndef BOSS_ALIEN_CLASS_H
 #define BOSS_ALIEN_CLASS_H
 
+#include <unistd.h>
 #include "AAlien.class.hpp"
 
 class Boss : public AAlien {
@@ -12,8 +13,8 @@ public:
     ~Boss();
 
     int checkColision(int x, int y);
-
-    void draw(WINDOW *win);
+    void drawDeath(WINDOW * win);
+    void draw(WINDOW * win);
 };
 
 #endif
