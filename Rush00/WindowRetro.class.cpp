@@ -5,17 +5,17 @@ void WindowRetro::drawBorders(WINDOW * screen) {
     int y = this->height;
     int i = 0;
     getmaxyx(screen, y, x);
-    mvwprintw(screen, 0, 0, "+");
-    mvwprintw(screen, y - 1, 0, "+");
-    mvwprintw(screen, 0, x - 1, "+");
-    mvwprintw(screen, y - 1, x - 1, "+");
+    mvwaddch(screen, 0, 0, ACS_ULCORNER);
+    mvwaddch(screen, y - 1, 0, ACS_LLCORNER);
+    mvwaddch(screen, 0, x - 1, ACS_URCORNER);
+    mvwaddch(screen, y - 1, x - 1, ACS_LRCORNER);
     for (i = 1; i < (y - 1); i++) {
-        mvwprintw(screen, i, 0, "|");
-        mvwprintw(screen, i, x - 1, "|");
+        mvwaddch(screen, i, 0, ACS_VLINE);
+        mvwaddch(screen, i, x - 1, ACS_VLINE);
     }
     for (i = 1; i < (x - 1); i++) {
-        mvwprintw(screen, 0, i, "-");
-        mvwprintw(screen, y - 1, i, "-");
+        mvwaddch(screen, 0, i, ACS_HLINE);
+        mvwaddch(screen, y - 1, i, ACS_HLINE);
     }
 }
 
@@ -248,6 +248,7 @@ void WindowRetro::Play() {
             break;
         }
         if (this->handleKey(this->user, getch()) == 1) {
+            this->user->win = 0;
             break;
         }
         if (this->drawBullets() == 1) {
@@ -325,6 +326,8 @@ WindowRetro::~WindowRetro() {
     endwin();
     if(this->user->lives == 0)
         std::cout << "Your dead, Try Again!" << std::endl;
+    else if(this->user->win == 0)
+        std::cout << "You quit...!" << std::endl;
     else
         std::cout << "You win, Congratulations!" << std::endl;
 }
