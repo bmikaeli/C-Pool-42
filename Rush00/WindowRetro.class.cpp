@@ -84,14 +84,7 @@ int WindowRetro::drawBullets() {
                 wattron(this->plate, COLOR_PAIR(1));
                 int colision = this->checkColisions(this->bullets[i].X, this->bullets[i].Y, this->bullets->direction);
                 if (colision) {
-                    wattron(this->plate, COLOR_PAIR(2));
-                    mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "W");
-                    mvwprintw(this->plate, this->bullets[i].Y + 1, this->bullets[i].X - 1, "WWW");
                     this->deleteBullets(i);
-                    wattron(this->plate, COLOR_PAIR(1));
-                    this->drawBorders(this->plate);
-                    wrefresh(this->plate);
-                    usleep(10000);
                     if (colision == 1) {
                         return 1;
                     }
@@ -141,7 +134,10 @@ int WindowRetro::checkColisions(int x, int y, int direction) {
             if (direction == -1) {
                 if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
                     this->user->score += this->aliens[i].scoreValue;
-                    this->deleteAlien(i);
+                    this->aliens[i].drawDeath(this->plate);
+                    this->aliens[i].takeDamage();
+                    if(this->aliens[i].hp < 0)
+                        this->deleteAlien(i);
                     return 2;
                 }
             }

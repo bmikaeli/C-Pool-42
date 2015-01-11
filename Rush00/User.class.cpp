@@ -5,7 +5,7 @@ void User::takeDamage(int amount) {
 }
 
 void User::attack(AAlien &target) {
-    target.takeDamage(this->weapon->getDamage());
+    target.takeDamage();
 }
 
 const char *User::getWeapon() const {

@@ -3,6 +3,8 @@
 Stupid::Stupid(int x, int y, int direction, int scoreValue) {
     this->X = x;
     this->Y = y;
+    this->size = 3;
+    this->hp = 1;
     this->scoreValue = scoreValue;
     this->direction = direction;
     this->bulletSkin = (char *) "X";

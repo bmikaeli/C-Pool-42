@@ -9,9 +9,10 @@
 
 class AAlien {
 public:
-    virtual void takeDamage(int);
+    void takeDamage();
 
     virtual void draw(WINDOW *win);
+    virtual void drawDeath(WINDOW *win);
     AAlien();
 
     virtual ~AAlien();
@@ -21,6 +22,7 @@ public:
     char *bulletSkin;
     int X;
     int direction;
+    int size;
     int Y;
 };
 

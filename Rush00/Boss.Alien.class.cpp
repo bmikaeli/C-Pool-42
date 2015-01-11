@@ -3,6 +3,8 @@
 Boss::Boss(int x, int y, int direction, int scoreValue) {
     this->X = x;
     this->Y = y;
+    this->size = 5;
+    this->hp = 3;
     this->scoreValue = scoreValue;
     this->direction = direction;
     this->bulletSkin = (char *) "U";
