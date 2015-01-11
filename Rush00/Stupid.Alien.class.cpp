@@ -5,7 +5,7 @@ Stupid::Stupid(int x, int y, int direction, int scoreValue) {
     this->Y = y;
     this->scoreValue = scoreValue;
     this->direction = direction;
-    this->bulletSkin = "X";
+    this->bulletSkin = (char *) "X";
 }
 
 Stupid::Stupid() {

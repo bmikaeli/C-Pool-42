@@ -1,6 +1,7 @@
 #include "Bullet.Weapon.class.hpp"
 
-Bullet::Bullet(int x, int y, int direction, char * skin) : X(x), Y(y), direction(direction), skin(skin){
+Bullet::Bullet(int x, int y, int direction, char * skin) : X(x), Y(y), direction(direction){
+	this->skin = skin;
 }
 
 Bullet &Bullet::operator=(const Bullet &rhs) {
