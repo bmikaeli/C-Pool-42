@@ -46,6 +46,7 @@ int WindowRetro::handleKey(User *user, int key) {
         default:
             break;
     }
+    return 0;
 }
 
 void WindowRetro::checkResize(void) {
@@ -144,13 +145,13 @@ int WindowRetro::checkColisions(int x, int y) {
 int WindowRetro::checkHumanColisions(int x, int y) {
     for (int i = 0; i < this->nbAliens; i++) {
         if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
-            this->user->score += this->aliens[i].scoreValue;
             this->deleteAlien(i);
-            return 1;
+            return 2;
         }
         else
             return 0;
     }
+    return 0;
 }
 
 void WindowRetro::addBullet(int x, int y, int direction) {
@@ -169,7 +170,6 @@ void WindowRetro::addBullet(int x, int y, int direction) {
 void WindowRetro::drawAliens() {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
-            this->aliens[i].draw(this->plate, this->aliens[i].Y, this->aliens[i].X);
             mvwprintw(this->plate, this->aliens[i].Y, this->aliens[i].X, "X");
             mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X - 1, "XXX");
         }
@@ -205,10 +205,6 @@ void WindowRetro::aliensAttack(int randomNumber) {
 
 void WindowRetro::Play() {
     int i = 0;
-    int direction = 1;
-    int tmp = 0;
-    int startx = 0;
-    int starty = 0;
     while (1) {
         usleep(20000);
 
@@ -222,7 +218,7 @@ void WindowRetro::Play() {
             }
         }
         int z = this->checkHumanColisions(this->user->X, this->user->Y);
-        if (z == 1)
+        if (z == 2)
             break;
         this->checkResize();
         if (this->handleKey(this->user, getch()) == 1) {
@@ -272,6 +268,8 @@ WindowRetro::WindowRetro() {
     this->scoreSize = 3;
     this->height = 600;
     this->width = 300;
+    //if(this->user->score != 0)
+        //this->user->score = 0;
     this->nbBullets = 0;
     this->nbAliens = 0;
     this->user = new User();
