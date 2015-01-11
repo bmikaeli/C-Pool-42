@@ -38,6 +38,7 @@ User::User() {
     this->Y = 1;
     this->hp = 100;
     this->lives = 3;
+    this->score = 0;
 }
 
 const char *User::getLives() {
