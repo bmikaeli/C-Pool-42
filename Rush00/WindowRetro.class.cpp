@@ -192,8 +192,7 @@ void WindowRetro::addBullet(int x, int y, int direction, char *skin) {
 void WindowRetro::drawAliens() {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
-            mvwprintw(this->plate, this->aliens[i].Y, this->aliens[i].X, "X");
-            mvwprintw(this->plate, this->aliens[i].Y + 1, this->aliens[i].X - 1, "XXX");
+            this->aliens[i].draw(this->plate);
         }
     }
 }
@@ -283,25 +282,26 @@ void WindowRetro::Play() {
     }
 }
 
-void WindowRetro::addAliens(int x, int y, int direction, int scoreValue) {
-    AAlien *newaliens = new AAlien[this->nbAliens + 1];
+void WindowRetro::addAliens(AAlien & alien) {
+    AAlien *newaliens = new Stupid[this->nbAliens + 1];
     int i = 0;
     while (i < this->nbAliens) {
         newaliens[i] = this->aliens[i];
         i++;
     }
-    newaliens[i] = Stupid(x, y, direction, scoreValue);
+    newaliens[i] = alien;
     this->nbAliens++;
     this->aliens = newaliens;
 }
-void WindowRetro::addBoss(int x, int y, int direction, int scoreValue) {
-    AAlien *newaliens = new AAlien[this->nbAliens + 1];
+
+void WindowRetro::addBoss(AAlien & alien) {
+    AAlien *newaliens = new Boss[this->nbAliens + 1];
     int i = 0;
     while (i < this->nbAliens) {
         newaliens[i] = this->aliens[i];
         i++;
     }
-    newaliens[i] = Boss(x, y, direction, scoreValue);
+    newaliens[i] = alien;
     this->nbAliens++;
     this->aliens = newaliens;
 }

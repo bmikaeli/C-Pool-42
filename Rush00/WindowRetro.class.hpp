@@ -24,9 +24,9 @@ public:
 
     int handleKey(User *user, int key);
 
-    void addAliens(int x, int y, int direction, int scoreValue);
+    void addAliens(AAlien & alien);
 
-    void addBoss(int x, int y, int direction, int scoreValue);
+    void addBoss(AAlien & alien);
 
     void Play();
 

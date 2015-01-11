@@ -2,6 +2,7 @@
 #define STUPID_ALIEN_CLASS_H
 
 #include "AAlien.class.hpp"
+#include "WindowRetro.class.hpp"
 
 class Stupid : public AAlien {
 public:
@@ -11,7 +12,7 @@ public:
 
     ~Stupid();
 
-    void draw();
+    void draw(WINDOW * win);
 };
 
 #endif

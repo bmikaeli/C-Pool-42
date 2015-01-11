@@ -11,7 +11,7 @@ public:
 
     ~Boss();
 
-    void draw();
+    void draw(WINDOW * win);
 };
 
 #endif

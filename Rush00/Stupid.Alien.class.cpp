@@ -13,3 +13,8 @@ Stupid::Stupid() {
 
 Stupid::~Stupid() {
 }
+
+void Stupid::draw(WINDOW * win) {
+    mvwprintw(win, this->Y, this->X, "X");
+    mvwprintw(win, this->Y + 1, this->X - 1, "XXX");
+}

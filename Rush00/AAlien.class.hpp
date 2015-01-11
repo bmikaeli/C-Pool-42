@@ -6,10 +6,12 @@
 #include <curses.h>
 #include <signal.h>
 
+
 class AAlien {
 public:
     virtual void takeDamage(int);
 
+    virtual void draw(WINDOW *win);
     AAlien();
 
     virtual ~AAlien();

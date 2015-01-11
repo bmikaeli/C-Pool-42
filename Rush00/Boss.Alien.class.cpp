@@ -13,3 +13,8 @@ Boss::Boss() {
 
 Boss::~Boss() {
 }
+
+void Boss::draw(WINDOW * win) {
+    mvwprintw(win, this->Y, this->X, "X");
+    mvwprintw(win, this->Y + 1, this->X - 1, "XXXXXXXX");
+}

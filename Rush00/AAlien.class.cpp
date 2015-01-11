@@ -9,3 +9,9 @@ AAlien::AAlien() {
 
 AAlien::~AAlien() {
 }
+
+
+void AAlien::draw(WINDOW * win) {
+    mvwprintw(win, this->Y, this->X, "X");
+    mvwprintw(win, this->Y + 1, this->X - 1, "XXX");
+}
