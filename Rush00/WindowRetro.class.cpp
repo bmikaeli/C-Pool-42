@@ -5,10 +5,10 @@ void WindowRetro::drawBorders(WINDOW * screen) {
     int y = this->height;
     int i = 0;
     getmaxyx(screen, y, x);
-    mvwprintw(screen, 0, 0, "+");
-    mvwprintw(screen, y - 1, 0, "+");
-    mvwprintw(screen, 0, x - 1, "+");
-    mvwprintw(screen, y - 1, x - 1, "+");
+    mvwaddch(screen, 0, 0, ACS_ULCORNER);
+    mvwaddch(screen, y - 1, 0, ACS_LLCORNER);
+    mvwaddch(screen, 0, x - 1, ACS_URCORNER);
+    mvwaddch(screen, y - 1, x - 1, ACS_LRCORNER);
     for (i = 1; i < (y - 1); i++) {
         mvwaddch(screen, i, 0, ACS_VLINE);
         mvwaddch(screen, i, x - 1, ACS_VLINE);
@@ -157,7 +157,7 @@ int WindowRetro::checkColisions(int x, int y, int direction) {
             wrefresh(this->plate);
             usleep(100000);
             this->user->lives -= 1;
-            if (this->user->lives < 0) {
+            if (this->user->lives < 1) {
                 return 1;
             }
         }
@@ -257,9 +257,11 @@ void WindowRetro::Play() {
             break;
         }
         if (this->handleKey(this->user, getch()) == 1) {
+            this->user->win = 0;
             break;
         }
         if (this->drawBullets() == 1) {
+            this->user->lives = 0;
             break;
         }
         this->drawBorders(this->plate);
@@ -308,9 +310,6 @@ WindowRetro::WindowRetro() {
     this->nbAliens = 0;
     this->user = new User();
 
-    //if(this->user->score != 0)
-    //this->user->score = 0;
-
     RocketLauncher a;
     Laser b;
 
@@ -335,4 +334,10 @@ WindowRetro::~WindowRetro() {
     delwin(this->plate);
     delwin(this->infos);
     endwin();
+    if(this->user->lives == 0)
+        std::cout << "Your dead, Try Again!" << std::endl;
+    else if(this->user->win == 0)
+        std::cout << "You quit...!" << std::endl;
+    else
+        std::cout << "You win, Congratulations!" << std::endl;
 }

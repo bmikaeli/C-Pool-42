@@ -33,6 +33,7 @@ public:
     int Y;
     int score;
     int lives;
+    int win;
     Aweapon *weapon;
     int nbWeapon;
     int currentWeaponIndex;
