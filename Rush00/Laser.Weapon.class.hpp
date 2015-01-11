@@ -5,7 +5,11 @@
 
 class Laser : public Aweapon {
 public :
+    Laser(Laser &src);
+
     Laser();
+
+    Laser &operator=(Laser const &rhs);
 
     ~Laser();
 };

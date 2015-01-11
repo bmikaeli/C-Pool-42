@@ -9,6 +9,8 @@ class Aweapon {
 public:
     Aweapon();
 
+    Aweapon(Aweapon &src);
+
     Aweapon(std::string name, int damage, char *skin);
 
     ~Aweapon();
@@ -16,6 +18,8 @@ public:
     int getDamage();
 
     const char *getName();
+
+    Aweapon &operator=(Aweapon &rhs);
 
     char *skin;
 

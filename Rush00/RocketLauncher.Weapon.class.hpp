@@ -8,6 +8,10 @@ class RocketLauncher : public Aweapon {
 public :
     RocketLauncher();
 
+    RocketLauncher(RocketLauncher &src);
+
+    RocketLauncher &operator=(RocketLauncher const &rhs);
+
     ~RocketLauncher();
 };
 

@@ -27,3 +27,10 @@ const char *Aweapon::getName() {
     const char *cstr = s.c_str();
     return cstr;
 }
+
+Aweapon &Aweapon::operator=(Aweapon &rhs) {
+    this->name = rhs.name;
+    this->damage = rhs.damage;
+    this->skin = rhs.skin;
+    return *this;
+}

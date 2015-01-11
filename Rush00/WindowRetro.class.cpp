@@ -1,5 +1,4 @@
 #include "WindowRetro.class.hpp"
-
 void WindowRetro::drawBorders(WINDOW * screen) {
     int x = this->width;
     int y = this->height;
@@ -60,8 +59,7 @@ void WindowRetro::checkResize(void) {
 
     if (new_y != this->height || new_x != this->width) {
         static int i = 0;
-        if(i != 0)
-        {
+        if (i != 0) {
             exit(1);
         }
         this->width = new_x;
@@ -242,8 +240,7 @@ void WindowRetro::Play() {
         usleep(20000);
 
         if (nbAliens == 0) {
-            if(j == 1)
-            {
+            if (j == 1) {
                 this->user->win = 1;
                 break;
             }

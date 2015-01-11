@@ -1,9 +1,7 @@
 #include "WindowRetro.class.hpp"
-
 int main() {
     WindowRetro *win = new WindowRetro();
 
-    //Boss boss(12, 2, 1, 40);
 
     Stupid z(5, 2, 1, 150);
     Stupid a(25, 2, 1, 200);
@@ -23,8 +21,7 @@ int main() {
     win->addAliens(f);
     win->addAliens(i);
     win->addAliens(j);
-    //win->addBoss(boss);
-//
+
     win->Play();
     delete win;
     return 0;

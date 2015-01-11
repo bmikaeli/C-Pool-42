@@ -13,6 +13,7 @@ public :
 
     Bullet &operator=(const Bullet &rhs);
 
+
     int X;
     int Y;
     char *skin;

@@ -34,3 +34,14 @@ int AAlien::checkColision(int x, int y) {
         return 0;
     }
 }
+
+AAlien &AAlien::operator=(AAlien &rhs) {
+    this->hp = rhs.hp;
+    this->scoreValue = rhs.scoreValue;
+    this->bulletSkin = rhs.bulletSkin;
+    this->X = rhs.X;
+    this->direction = rhs.direction;
+    this->size = rhs.size;
+    this->Y = rhs.Y;
+    return *this;
+}

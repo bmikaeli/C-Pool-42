@@ -15,7 +15,11 @@ public:
 
     virtual void drawDeath(WINDOW *win);
 
+    AAlien &operator=(AAlien &rhs);
+
     AAlien();
+
+    AAlien(AAlien &src);
 
     virtual ~AAlien();
 

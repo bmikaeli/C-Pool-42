@@ -20,11 +20,15 @@ class WindowRetro {
 public:
     WindowRetro();
 
+    WindowRetro(WindowRetro &src);
+
     ~WindowRetro();
 
     int handleKey(User *user, int key);
 
     void addAliens(AAlien &alien);
+
+    User &operator=(const User &rhs);
 
     void addBoss(AAlien &alien);
 

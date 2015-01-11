@@ -11,6 +11,8 @@ class User {
 public:
     User();
 
+    User(User &src);
+
     ~User();
 
     void takeDamage(int amount);
@@ -29,6 +31,9 @@ public:
     const char *getLives();
 
     const char *getScore();
+
+    User &operator=(const User &rhs);
+
 
     int Y;
     int score;

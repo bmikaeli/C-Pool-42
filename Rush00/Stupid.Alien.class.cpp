@@ -1,4 +1,6 @@
+
 #include "Stupid.Alien.class.hpp"
+
 
 Stupid::Stupid(int x, int y, int direction, int scoreValue) {
     this->X = x;
