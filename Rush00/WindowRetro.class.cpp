@@ -30,9 +30,9 @@ int WindowRetro::handleKey(User *user, int key) {
                 user->X--;
             break;
         case KEY_UP:
-            //if (user->Y > this->height / 2) {
+            if (user->Y > this->height / 2) {
                 user->Y--;
-            //}
+            }
             break;
         case KEY_DOWN:
             if (user->Y < this->height - 3 - this->scoreSize) {
