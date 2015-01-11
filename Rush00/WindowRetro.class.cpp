@@ -155,7 +155,7 @@ int WindowRetro::checkColisions(int x, int y) {
 
 int WindowRetro::checkHumanColisions(int x, int y) {
     for (int i = 0; i < this->nbAliens; i++) {
-        if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
+        if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X == x && this->aliens[i].Y  - 1 == y) || (this->aliens[i].X == x && this->aliens[i].Y == y - 1)) {
             this->deleteAlien(i);
             return 2;
         }
