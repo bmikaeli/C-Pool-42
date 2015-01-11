@@ -12,11 +12,15 @@ public:
     void takeDamage();
 
     virtual void draw(WINDOW *win);
+
     virtual void drawDeath(WINDOW *win);
+
     AAlien();
 
     virtual ~AAlien();
+
     virtual int checkColision(int x, int y);
+
     int hp;
     int scoreValue;
     char *bulletSkin;

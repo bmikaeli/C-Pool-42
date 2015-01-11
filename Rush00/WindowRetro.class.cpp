@@ -89,7 +89,6 @@ int WindowRetro::drawBullets() {
                         return 1;
                     }
                 }
-
             }
             else
                 this->deleteBullets(i);
@@ -132,11 +131,11 @@ int WindowRetro::checkColisions(int x, int y, int direction) {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
             if (direction == -1) {
-                if(this->aliens[i].checkColision(x, y)){
+                if (this->aliens[i].checkColision(x, y)) {
                     this->user->score += this->aliens[i].scoreValue;
                     this->aliens[i].drawDeath(this->plate);
                     this->aliens[i].takeDamage();
-                    if(this->aliens[i].hp < 0)
+                    if (this->aliens[i].hp <= 0)
                         this->deleteAlien(i);
                     return 2;
                 }
@@ -160,7 +159,6 @@ int WindowRetro::checkColisions(int x, int y, int direction) {
     }
     return 0;
 }
-
 
 int WindowRetro::checkHumanColisions(int x, int y) {
     for (int i = 0; i < this->nbAliens; i++) {
@@ -278,7 +276,7 @@ void WindowRetro::Play() {
     }
 }
 
-void WindowRetro::addAliens(AAlien & alien) {
+void WindowRetro::addAliens(AAlien &alien) {
     AAlien *newaliens = new Stupid[this->nbAliens + 1];
     int i = 0;
     while (i < this->nbAliens) {
@@ -290,7 +288,7 @@ void WindowRetro::addAliens(AAlien & alien) {
     this->aliens = newaliens;
 }
 
-void WindowRetro::addBoss(AAlien & alien) {
+void WindowRetro::addBoss(AAlien &alien) {
     AAlien *newaliens = new Boss[this->nbAliens + 1];
     int i = 0;
     while (i < this->nbAliens) {
@@ -324,7 +322,7 @@ WindowRetro::WindowRetro() {
     keypad(stdscr, TRUE);
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
-    init_pair(3, COLOR_BLUE, COLOR_BLACK);
+    init_pair(3, COLOR_GREEN, COLOR_BLACK);
 
     this->plate = newwin(this->height - this->scoreSize, this->width, 0, 0);
     this->infos = newwin(this->scoreSize, this->width, this->height - this->scoreSize, 0);
@@ -334,9 +332,9 @@ WindowRetro::~WindowRetro() {
     delwin(this->plate);
     delwin(this->infos);
     endwin();
-    if(this->user->lives == 0)
+    if (this->user->lives == 0)
         std::cout << "Your dead, Try Again!" << std::endl;
-    else if(this->user->win == 0)
+    else if (this->user->win == 0)
         std::cout << "You quit...!" << std::endl;
     else
         std::cout << "You win, Congratulations!" << std::endl;

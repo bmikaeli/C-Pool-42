@@ -12,7 +12,7 @@ public:
 
     ~Stupid();
 
-    void draw(WINDOW * win);
+    void draw(WINDOW *win);
 };
 
 #endif

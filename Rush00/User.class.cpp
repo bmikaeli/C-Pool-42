@@ -28,13 +28,17 @@ void User::addWeapon(Aweapon &src) {
         }
         i++;
     }
-    newWeapon[i] = src;
     this->nbWeapon++;
     this->weapon = newWeapon;
+    newWeapon[i] = src;
 }
 
 void User::changeWeapon() {
-    this->currentWeaponIndex = (this->currentWeaponIndex + 1) > this->nbWeapon ? 0 : this->currentWeaponIndex + 1;
+    if(this->currentWeaponIndex == 0)
+        this->currentWeaponIndex =1;
+    else
+        this->currentWeaponIndex = 0;
+//    this->currentWeaponIndex = (this->currentWeaponIndex + 1) > this->nbWeapon ? 0 : this->currentWeaponIndex + 1;
 }
 
 User::User() {
