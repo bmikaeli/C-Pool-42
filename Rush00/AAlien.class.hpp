@@ -10,8 +10,6 @@ class AAlien {
 public:
     virtual void takeDamage(int);
 
-    virtual void draw(WINDOW *plate, int Y, int x) const;
-
     AAlien();
 
     virtual ~AAlien();

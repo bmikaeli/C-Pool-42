@@ -14,7 +14,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	g++ $(FLAG) $(OBJ) -o $(NAME)
 %.o: %.cpp
-	g++ -c $^
+	g++ $(FLAG) -c $^
 clean :
 	rm -f $(OBJ)
 fclean : clean

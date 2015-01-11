@@ -9,8 +9,3 @@ AAlien::AAlien() {
 
 AAlien::~AAlien() {
 }
-
-void AAlien::draw(WINDOW *plate, int Y, int x) const {
-
-
-}
