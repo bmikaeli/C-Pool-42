@@ -10,12 +10,12 @@ void WindowRetro::drawBorders(WINDOW * screen) {
     mvwprintw(screen, 0, x - 1, "+");
     mvwprintw(screen, y - 1, x - 1, "+");
     for (i = 1; i < (y - 1); i++) {
-        mvwprintw(screen, i, 0, "|");
-        mvwprintw(screen, i, x - 1, "|");
+        mvwaddch(screen, i, 0, ACS_VLINE);
+        mvwaddch(screen, i, x - 1, ACS_VLINE);
     }
     for (i = 1; i < (x - 1); i++) {
-        mvwprintw(screen, 0, i, "-");
-        mvwprintw(screen, y - 1, i, "-");
+        mvwaddch(screen, 0, i, ACS_HLINE);
+        mvwaddch(screen, y - 1, i, ACS_HLINE);
     }
 }
 
@@ -75,8 +75,14 @@ int WindowRetro::drawBullets() {
         for (int i = 0; i < this->nbBullets; i++) {
             if (this->bullets[i].Y >= 0) {
                 this->bullets[i].Y -= this->bullets[i].direction;
+                if ((this->user->weapon[this->user->currentWeaponIndex].getDamage() == 50) && (this->bullets[i].direction == 1))
+                    wattron(this->plate, COLOR_PAIR(3));
+                else if ((this->user->weapon[this->user->currentWeaponIndex].getDamage() == 30) && (this->bullets[i].direction == 1))
+                    wattron(this->plate, COLOR_PAIR(2));
+
                 mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, this->bullets[i].skin);
-                int colision = this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
+                wattron(this->plate, COLOR_PAIR(1));
+                int colision = this->checkColisions(this->bullets[i].X, this->bullets[i].Y, this->bullets->direction);
                 if (colision) {
                     wattron(this->plate, COLOR_PAIR(2));
                     mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "W");
@@ -129,13 +135,15 @@ void WindowRetro::deleteBullets(int bulletIndex) {
     this->bullets = newone;
 }
 
-int WindowRetro::checkColisions(int x, int y) {
+int WindowRetro::checkColisions(int x, int y, int direction) {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
-            if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
-                this->user->score += this->aliens[i].scoreValue;
-                this->deleteAlien(i);
-                return 2;
+            if (direction == -1) {
+                if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
+                    this->user->score += this->aliens[i].scoreValue;
+                    this->deleteAlien(i);
+                    return 2;
+                }
             }
         }
     }
@@ -156,6 +164,7 @@ int WindowRetro::checkColisions(int x, int y) {
     }
     return 0;
 }
+
 
 int WindowRetro::checkHumanColisions(int x, int y) {
     for (int i = 0; i < this->nbAliens; i++) {
@@ -316,6 +325,7 @@ WindowRetro::WindowRetro() {
     keypad(stdscr, TRUE);
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
+    init_pair(3, COLOR_BLUE, COLOR_BLACK);
 
     this->plate = newwin(this->height - this->scoreSize, this->width, 0, 0);
     this->infos = newwin(this->scoreSize, this->width, this->height - this->scoreSize, 0);

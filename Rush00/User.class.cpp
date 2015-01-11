@@ -19,9 +19,13 @@ const char *User::getWeapon() const {
 
 void User::addWeapon(Aweapon &src) {
     int i = 0;
+    int j = 0;
     Aweapon *newWeapon = new Aweapon[this->nbWeapon + 1];
     while (i < this->nbWeapon) {
-        newWeapon[i] = this->weapon[i];
+        if (this->weapon[i].getDamage() != 0) {
+            newWeapon[j] = this->weapon[i];
+            j++;
+        }
         i++;
     }
     newWeapon[i] = src;

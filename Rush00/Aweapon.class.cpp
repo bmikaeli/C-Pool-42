@@ -4,7 +4,7 @@ int Aweapon::getDamage() {
     return this->damage;
 }
 
-Aweapon::Aweapon(std::string name, int damage, char * skin) {
+Aweapon::Aweapon(std::string name, int damage, char *skin) {
     this->name = name;
     this->damage = damage;
     this->skin = skin;
@@ -18,7 +18,8 @@ Aweapon::~Aweapon() {
 
 
 }
-const char * Aweapon::getName() {
+
+const char *Aweapon::getName() {
     std::string s;
     std::stringstream out;
     out << this->name;

@@ -9,13 +9,15 @@ class Aweapon {
 public:
     Aweapon();
 
-    Aweapon(std::string name, int damage, char * skin);
+    Aweapon(std::string name, int damage, char *skin);
 
     ~Aweapon();
 
     int getDamage();
-    const char * getName();
-    char * skin;
+
+    const char *getName();
+
+    char *skin;
 
 protected:
     int damage;

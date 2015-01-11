@@ -15,7 +15,7 @@ public :
 
     int X;
     int Y;
-    char * skin;
+    char *skin;
     int direction;
 
 };

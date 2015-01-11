@@ -45,11 +45,11 @@ private:
 
     int drawBullets();
 
-    void addBullet(int x, int y, int direction, char * skin);
+    void addBullet(int x, int y, int direction, char *skin);
 
     void checkResize();
 
-    int checkColisions(int x, int y);
+    int checkColisions(int x, int y, int direction);
 
     int checkHumanColisions(int x, int y);
 
