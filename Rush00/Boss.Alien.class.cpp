@@ -21,3 +21,12 @@ void Boss::draw(WINDOW * win) {
 	mvwprintw(win, this->Y, this->X - 1, "/X\\");
 	mvwprintw(win, this->Y + 1, this->X - 1, "---");
 }
+
+int Boss::checkColision(int x, int y) {
+    if ((this->X == x && this->Y == y) || (this->X - 1 == x && this->Y == y) || (this->X + 1 == x && this->Y == y)) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}

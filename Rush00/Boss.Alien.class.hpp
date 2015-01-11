@@ -11,6 +11,7 @@ public:
 
     ~Boss();
 
+    int checkColision(int x, int y);
     void draw(WINDOW * win);
 };
 

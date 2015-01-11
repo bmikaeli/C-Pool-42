@@ -132,7 +132,7 @@ int WindowRetro::checkColisions(int x, int y, int direction) {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
             if (direction == -1) {
-                if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
+                if(this->aliens[i].checkColision(x, y)){
                     this->user->score += this->aliens[i].scoreValue;
                     this->aliens[i].drawDeath(this->plate);
                     this->aliens[i].takeDamage();

@@ -16,7 +16,7 @@ public:
     AAlien();
 
     virtual ~AAlien();
-
+    virtual int checkColision(int x, int y);
     int hp;
     int scoreValue;
     char *bulletSkin;

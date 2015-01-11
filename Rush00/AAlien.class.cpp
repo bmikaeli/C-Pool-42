@@ -12,8 +12,7 @@ AAlien::~AAlien() {
 }
 
 
-void AAlien::drawDeath(WINDOW * win)
-{
+void AAlien::drawDeath(WINDOW * win) {
     wattron(win, COLOR_PAIR(2));
     mvwprintw(win, this->Y, this->X, "W");
     mvwprintw(win, this->Y + 1, this->X - 1, "WWW");
@@ -25,4 +24,13 @@ void AAlien::drawDeath(WINDOW * win)
 void AAlien::draw(WINDOW * win) {
     mvwprintw(win, this->Y, this->X, "X");
     mvwprintw(win, this->Y + 1, this->X - 1, "XXX");
+}
+
+int AAlien::checkColision(int x, int y) {
+    if ((this->X == x && this->Y == y) || (this->X - 1 == x && this->Y == y) || (this->X + 1 == x && this->Y == y)) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
