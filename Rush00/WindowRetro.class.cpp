@@ -216,7 +216,7 @@ void WindowRetro::Play() {
             int tmp = 6 - nbAliens;
             for (int g = 0; g < tmp; g++) {
                 if (this->aliens[nbAliens].X < 4)
-                    this->addAliens(12, 4, 1, 150);
+                    this->addAliens(12, 2, 1, 150);
                 else
                     this->addAliens(2, 2, 1, 150);
             }
