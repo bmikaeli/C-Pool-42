@@ -1,4 +1,5 @@
 #include "WindowRetro.class.hpp"
+
 void WindowRetro::drawBorders(WINDOW * screen) {
     int x = this->width;
     int y = this->height;
@@ -51,7 +52,7 @@ int WindowRetro::handleKey(User *user, int key) {
     return 0;
 }
 
-void WindowRetro::checkResize(void) {
+int WindowRetro::checkResize(void) {
 
     int new_x;
     int new_y;
@@ -59,9 +60,8 @@ void WindowRetro::checkResize(void) {
 
     if (new_y != this->height || new_x != this->width) {
         static int i = 0;
-        if (i != 0) {
-            exit(1);
-        }
+        if (i != 0)
+            return 1;
         this->width = new_x;
         this->height = new_y;
         wresize(this->plate, new_y - this->scoreSize, new_x);
@@ -72,6 +72,7 @@ void WindowRetro::checkResize(void) {
         this->drawBorders(this->infos);
         i++;
     }
+    return 0;
 }
 
 int WindowRetro::drawBullets() {
@@ -244,7 +245,7 @@ void WindowRetro::Play() {
                 this->user->win = 1;
                 break;
             }
-            Boss boss(12, 2, 1, 40);
+            Boss boss(12, 2, 1, 1000);
             j = 1;
             this->addBoss(boss);
         }
@@ -284,7 +285,11 @@ void WindowRetro::Play() {
         if (i % 10 == 0) {
             this->moveAliens();
         }
-        this->checkResize();
+        if(this->checkResize() == 1)
+        {
+            this->user->win = 2;
+            break ;
+        }
         this->aliensAttack(i);
         wrefresh(this->infos);
         wrefresh(this->plate);
@@ -351,10 +356,13 @@ WindowRetro::~WindowRetro() {
     delwin(this->plate);
     delwin(this->infos);
     endwin();
+    std::cout << "Your score is: " << this->user->score << " :)" << std::endl;
     if (this->user->lives == 0)
         std::cout << "Your dead, Try Again!" << std::endl;
     else if (this->user->win == 0)
         std::cout << "You quit...!" << std::endl;
+    else if (this->user->win == 2)
+        std::cout << "Resize are not allowed!" << std::endl;
     else
         std::cout << "You win, Congratulations!" << std::endl;
 }

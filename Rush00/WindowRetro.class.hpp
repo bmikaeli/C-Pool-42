@@ -54,7 +54,7 @@ private:
 
     void addBullet(int x, int y, int direction, char *skin);
 
-    void checkResize();
+    int checkResize();
 
     int checkColisions(int x, int y, int direction);
 
