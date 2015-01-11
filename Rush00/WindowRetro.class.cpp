@@ -77,6 +77,15 @@ int WindowRetro::drawBullets() {
                 mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, this->bullets[i].skin);
                 int colision = this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
                 if (colision) {
+
+                    wattron(this->plate, COLOR_PAIR(2));
+                    mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "W");
+                    mvwprintw(this->plate, this->bullets[i].Y + 1, this->bullets[i].X - 1,  "WWW");
+                    wattron(this->plate, COLOR_PAIR(1));
+                    this->drawBorders(this->plate);
+                    wrefresh(this->plate);
+                    usleep(10000);
+
                     if (colision == 1) {
                         return 1;
                     }
@@ -279,6 +288,7 @@ WindowRetro::WindowRetro() {
     this->user->Y = 10;
     RocketLauncher a;
     Laser b;
+
     this->user->addWeapon(a);
     this->user->addWeapon(b);
     this->user->currentWeaponIndex = 0;
@@ -288,6 +298,8 @@ WindowRetro::WindowRetro() {
     curs_set(FALSE);
     nodelay(stdscr, TRUE);
     keypad(stdscr, TRUE);
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
 
     this->plate = newwin(this->height - this->scoreSize, this->width, 0, 0);
     this->infos = newwin(this->scoreSize, this->width, this->height - this->scoreSize, 0);
