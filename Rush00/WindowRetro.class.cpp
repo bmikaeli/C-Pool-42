@@ -1,6 +1,6 @@
 #include "WindowRetro.class.hpp"
 
-void WindowRetro::drawBorders(WINDOW *screen) {
+void WindowRetro::drawBorders(WINDOW * screen) {
     int x = this->width;
     int y = this->height;
     int i = 0;
@@ -142,10 +142,8 @@ int WindowRetro::checkColisions(int x, int y) {
 }
 
 int WindowRetro::checkHumanColisions(int x, int y) {
-    for (int i = 0; i < this->nbAliens; i++)
-    {
-        if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y))
-        {
+    for (int i = 0; i < this->nbAliens; i++) {
+        if ((this->aliens[i].X == x && this->aliens[i].Y == y) || (this->aliens[i].X - 1 == x && this->aliens[i].Y == y) || (this->aliens[i].X + 1 == x && this->aliens[i].Y == y)) {
             this->user->score += this->aliens[i].scoreValue;
             this->deleteAlien(i);
             return 1;
@@ -224,8 +222,8 @@ void WindowRetro::Play() {
             }
         }
         int z = this->checkHumanColisions(this->user->X, this->user->Y);
-        if(z == 1)
-            break ;
+        if (z == 1)
+            break;
         this->checkResize();
         if (this->handleKey(this->user, getch()) == 1) {
             break;
@@ -279,8 +277,10 @@ WindowRetro::WindowRetro() {
     this->user = new User();
     this->user->X = 50;
     this->user->Y = 10;
-    RockerLauncher a;
+    RocketLauncher a;
+    Laser b;
     this->user->addWeapon(a);
+    this->user->addWeapon(b);
 
     initscr();
     start_color();

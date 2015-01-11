@@ -1,13 +1,13 @@
-#ifndef  ROCKERLAUNCHER_H
+#ifndef  ROCKETLAUNCHER_H
 #define ROCKETLAUNCHER_H
 
 #include "Aweapon.class.hpp"
 
-class RockerLauncher : public Aweapon {
+class RocketLauncher : public Aweapon {
 public :
-    RockerLauncher();
+    RocketLauncher();
 
-    ~RockerLauncher();
+    ~RocketLauncher();
 };
 
 #endif

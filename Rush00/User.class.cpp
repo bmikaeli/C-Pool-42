@@ -33,6 +33,7 @@ void User::addWeapon(Aweapon &src) {
 void User::changeWeapon() {
 //    this->currentWeaponIndex = (this->currentWeaponIndex  + 1) > this->nbWeapon ? 0 : this->currentWeaponIndex + 1;
 }
+
 User::User() {
     this->X = 1;
     this->Y = 1;

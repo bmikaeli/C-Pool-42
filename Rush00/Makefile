@@ -6,6 +6,7 @@ SRC = main.cpp \
     Stupid.Alien.class.cpp\
     User.class.cpp \
     RocketLauncher.Weapon.class.cpp \
+    Laser.Weapon.class.cpp \
     WindowRetro.class.cpp
 OBJ = $(SRC:.cpp=.o)
 FLAG = -Wall -Werror -Wextra -lncurses
