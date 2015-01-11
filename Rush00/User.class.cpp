@@ -18,8 +18,8 @@ const char *User::getWeapon() const {
 }
 
 void User::addWeapon(Aweapon &src) {
-    Aweapon *newWeapon = new Aweapon[this->nbWeapon + 1];
     int i = 0;
+    Aweapon *newWeapon = new Aweapon[this->nbWeapon + 1];
     while (i < this->nbWeapon) {
         newWeapon[i] = this->weapon[i];
         i++;
@@ -27,11 +27,10 @@ void User::addWeapon(Aweapon &src) {
     newWeapon[i] = src;
     this->nbWeapon++;
     this->weapon = newWeapon;
-
 }
 
 void User::changeWeapon() {
-//    this->currentWeaponIndex = (this->currentWeaponIndex  + 1) > this->nbWeapon ? 0 : this->currentWeaponIndex + 1;
+    this->currentWeaponIndex = (this->currentWeaponIndex + 1) > this->nbWeapon ? 0 : this->currentWeaponIndex + 1;
 }
 
 User::User() {

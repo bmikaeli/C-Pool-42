@@ -18,6 +18,7 @@ public:
 
     int hp;
     int scoreValue;
+    char *bulletSkin;
     int X;
     int direction;
     int Y;

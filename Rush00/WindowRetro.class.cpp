@@ -30,19 +30,21 @@ int WindowRetro::handleKey(User *user, int key) {
                 user->X--;
             break;
         case KEY_UP:
-            if (user->Y > this->height / 2)
+            if (user->Y > this->height / 2) {
                 user->Y--;
+            }
             break;
         case KEY_DOWN:
-            if (user->Y < this->height - 3 - this->scoreSize)
+            if (user->Y < this->height - 3 - this->scoreSize) {
                 user->Y++;
+            }
             break;
+        case KEY_EOL:
+            this->user->changeWeapon();
         case KEY_NPAGE:
             return 1;
         case ' ':
-            this->addBullet(this->user->X, this->user->Y, 1);
-        case KEY_PPAGE:
-            this->user->changeWeapon();
+            this->addBullet(this->user->X, this->user->Y, 1, this->user->weapon[this->user->currentWeaponIndex].skin);
         default:
             break;
     }
@@ -71,7 +73,7 @@ int WindowRetro::drawBullets() {
         for (int i = 0; i < this->nbBullets; i++) {
             if (this->bullets[i].Y >= 0) {
                 this->bullets[i].Y -= this->bullets[i].direction;
-                mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, "|");
+                mvwprintw(this->plate, this->bullets[i].Y, this->bullets[i].X, this->bullets[i].skin);
                 int colision = this->checkColisions(this->bullets[i].X, this->bullets[i].Y);
                 if (colision) {
                     if (colision == 1) {
@@ -153,7 +155,7 @@ int WindowRetro::checkHumanColisions(int x, int y) {
     }
 }
 
-void WindowRetro::addBullet(int x, int y, int direction) {
+void WindowRetro::addBullet(int x, int y, int direction, char * skin) {
 
     Bullet *newone = new Bullet[this->nbBullets + 1];
     int i = 0;
@@ -161,7 +163,7 @@ void WindowRetro::addBullet(int x, int y, int direction) {
         newone[i] = this->bullets[i];
         i++;
     }
-    newone[i] = Bullet(x, y, direction);
+    newone[i] = Bullet(x, y, direction, skin);
     this->nbBullets++;
     this->bullets = newone;
 }
@@ -197,7 +199,7 @@ void WindowRetro::aliensAttack(int randomNumber) {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
             if ((randomNumber + i * 11 + rand()) % 50 == 0) {
-                this->addBullet(this->aliens[i].X, this->aliens[i].Y, -1);
+                this->addBullet(this->aliens[i].X, this->aliens[i].Y, -1, this->aliens[i].bulletSkin);
             }
         }
     }
@@ -242,7 +244,7 @@ void WindowRetro::Play() {
         mvwprintw(this->infos, 1, 25, "Score : ");
         mvwprintw(this->infos, 1, 32, this->user->getScore());
         mvwprintw(this->infos, 1, 45, "Weapon :");
-        mvwprintw(this->infos, 1, 55, "Rocket Launcher");
+        mvwprintw(this->infos, 1, 55, this->user->weapon[this->user->currentWeaponIndex].getName());
 
         if (i % 10 == 0) {
             this->moveAliens();
@@ -281,6 +283,7 @@ WindowRetro::WindowRetro() {
     Laser b;
     this->user->addWeapon(a);
     this->user->addWeapon(b);
+    this->user->currentWeaponIndex = 0;
 
     initscr();
     start_color();

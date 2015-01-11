@@ -7,7 +7,7 @@ class Bullet {
 public :
     Bullet();
 
-    Bullet(int x, int y, int direction);
+    Bullet(int x, int y, int direction, char *skin);
 
     ~Bullet();
 
@@ -15,6 +15,7 @@ public :
 
     int X;
     int Y;
+    char * skin;
     int direction;
 
 };

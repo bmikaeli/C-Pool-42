@@ -44,7 +44,7 @@ private:
 
     int drawBullets();
 
-    void addBullet(int x, int y, int direction);
+    void addBullet(int x, int y, int direction, char * skin);
 
     void checkResize();
 

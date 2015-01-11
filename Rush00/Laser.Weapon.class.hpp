@@ -6,7 +6,7 @@
 class Laser : public Aweapon {
 public :
     Laser();
-
+    
     ~Laser();
 };
 
