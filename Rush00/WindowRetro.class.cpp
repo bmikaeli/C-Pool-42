@@ -254,15 +254,22 @@ void WindowRetro::Play() {
         this->drawBorders(this->plate);
         this->drawBorders(this->infos);
         this->drawAliens();
-        mvwprintw(this->infos, 0, 0, "Infos");
+        wattron(this->plate, COLOR_PAIR(3));
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
         mvwprintw(this->plate, this->user->Y + 1, this->user->X - 1, "000");
+        wattron(this->infos, COLOR_PAIR(1));
+
+        mvwprintw(this->infos, 0, 0, "Infos");
+        wattron(this->infos, COLOR_PAIR(2));
         mvwprintw(this->infos, 1, 2, "lives : ");
         mvwprintw(this->infos, 1, 10, this->user->getLives());
+        wattron(this->infos, COLOR_PAIR(3));
         mvwprintw(this->infos, 1, 25, "Score : ");
         mvwprintw(this->infos, 1, 32, this->user->getScore());
+        wattron(this->infos, COLOR_PAIR(4));
         mvwprintw(this->infos, 1, 45, "Weapon :");
         mvwprintw(this->infos, 1, 55, this->user->weapon[this->user->currentWeaponIndex].getName());
+        wattron(this->infos, COLOR_PAIR(1));
 
         if (i % 10 == 0) {
             this->moveAliens();
@@ -324,6 +331,7 @@ WindowRetro::WindowRetro() {
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
     init_pair(3, COLOR_GREEN, COLOR_BLACK);
+    init_pair(4, COLOR_BLUE, COLOR_BLACK);
 
     this->plate = newwin(this->height - this->scoreSize, this->width, 0, 0);
     this->infos = newwin(this->scoreSize, this->width, this->height - this->scoreSize, 0);
