@@ -17,6 +17,7 @@ Boss::~Boss() {
 }
 
 void Boss::draw(WINDOW * win) {
-    mvwprintw(win, this->Y, this->X, "X");
-    mvwprintw(win, this->Y + 1, this->X - 1, "XXXXXXXX");
+	mvwprintw(win, this->Y - 1, this->X - 3, "/X\\ /X\\");
+	mvwprintw(win, this->Y, this->X - 1, "/X\\");
+	mvwprintw(win, this->Y + 1, this->X - 1, "---");
 }
