@@ -35,14 +35,13 @@ int WindowRetro::handleKey(User *user, int key) {
             }
             break;
         case KEY_DOWN:
-            this->user->changeWeapon();
-
             if (user->Y < this->height - 3 - this->scoreSize) {
                 user->Y++;
             }
             break;
-        case KEY_BACKSPACE:
+        case KEY_HOME:
             this->user->changeWeapon();
+            break;
         case KEY_NPAGE:
             return 1;
         case ' ':
@@ -194,23 +193,24 @@ void WindowRetro::moveAliens() {
     if (this->nbAliens >= 1) {
         for (int i = 0; i < this->nbAliens; i++) {
             if (aliens[i].X >= this->width - 2) {
-                if (this->nbAliens >= 1) {
-                    for (int i = 0; i < this->nbAliens; i++) {
-                        aliens[i].Y += 2;
-                        aliens[i].direction = -1;
-                    }
+                for (int z = 0; z < this->nbAliens; z++) {
+
+                    aliens[z].Y += 2;
+                    aliens[z].direction = -1;
                 }
-                if (aliens[i].X <= 2) {
-                    for (int i = 0; i < this->nbAliens; i++) {
-                        aliens[i].direction = 1;
-                        aliens[i].Y += 2;
-                    }
+
+            }
+            if (aliens[i].X <= 2) {
+                for (int j = 0; j < this->nbAliens; j++) {
+                    aliens[j].direction = 1;
+                    aliens[j].Y += 2;
                 }
             }
             aliens[i].X += aliens[i].direction;
         }
     }
 }
+
 
 void WindowRetro::aliensAttack(int randomNumber) {
     std::srand(time(NULL));
