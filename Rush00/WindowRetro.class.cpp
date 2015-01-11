@@ -242,6 +242,7 @@ void WindowRetro::Play() {
         }
         int z = this->checkHumanColisions(this->user->X, this->user->Y);
         if (z == 2) {
+            this->user->lives = 0;
             break;
         }
         if (this->handleKey(this->user, getch()) == 1) {
