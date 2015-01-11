@@ -149,7 +149,7 @@ int WindowRetro::checkColisions(int x, int y) {
             wrefresh(this->plate);
             usleep(100000);
             this->user->lives -= 1;
-            if (this->user->lives < 0) {
+            if (this->user->lives < 1) {
                 return 1;
             }
         }
@@ -251,6 +251,7 @@ void WindowRetro::Play() {
             break;
         }
         if (this->drawBullets() == 1) {
+            this->user->lives = 0;
             break;
         }
         this->drawBorders(this->plate);
@@ -299,9 +300,6 @@ WindowRetro::WindowRetro() {
     this->nbAliens = 0;
     this->user = new User();
 
-    //if(this->user->score != 0)
-    //this->user->score = 0;
-
     RocketLauncher a;
     Laser b;
 
@@ -325,4 +323,8 @@ WindowRetro::~WindowRetro() {
     delwin(this->plate);
     delwin(this->infos);
     endwin();
+    if(this->user->lives == 0)
+        std::cout << "Your dead, Try Again!" << std::endl;
+    else
+        std::cout << "You win, Congratulations!" << std::endl;
 }
