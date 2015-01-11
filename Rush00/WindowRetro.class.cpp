@@ -59,6 +59,11 @@ void WindowRetro::checkResize(void) {
     getmaxyx(stdscr, new_y, new_x);
 
     if (new_y != this->height || new_x != this->width) {
+        static int i = 0;
+        if(i != 0)
+        {
+            exit(1);
+        }
         this->width = new_x;
         this->height = new_y;
         wresize(this->plate, new_y - this->scoreSize, new_x);
@@ -67,6 +72,7 @@ void WindowRetro::checkResize(void) {
         wclear(stdscr);
         this->drawBorders(this->plate);
         this->drawBorders(this->infos);
+        i++;
     }
 }
 
@@ -264,7 +270,7 @@ void WindowRetro::Play() {
         wattron(this->plate, COLOR_PAIR(3));
         mvwprintw(this->plate, this->user->Y, this->user->X, "0");
         mvwprintw(this->plate, this->user->Y + 1, this->user->X - 1, "000");
-        wattron(this->infos, COLOR_PAIR(1));
+        wattron(this->plate, COLOR_PAIR(1));
 
         mvwprintw(this->infos, 0, 0, "Infos");
         wattron(this->infos, COLOR_PAIR(2));
