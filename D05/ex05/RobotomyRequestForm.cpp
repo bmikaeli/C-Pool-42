@@ -19,6 +19,7 @@ void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
     (void) executor;
 }
 
+
 RobotomyRequestForm::~RobotomyRequestForm() {
 
 }

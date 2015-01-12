@@ -1,37 +1,32 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main() {
-    Bureaucrat b("joe", 40);
+    Bureaucrat b("joe", 4);
 
-    Bureaucrat b1("Tom", 60);
-    Form f("formtest", 50, 100);
-    Form f1("formtest1", 50, 100);
+    ShrubberyCreationForm f("salut");
+    PresidentialPardonForm p("coucou");
+    RobotomyRequestForm r("robot");
 
-    std::cout << b << b1 << f << std::endl << std::endl;
-
+    std::cout << b << std::endl;
     std::cout << f << std::endl;
-    std::cout << "first try : " << std::endl;
+
     try {
-        f.beSigned(b1);
+        b.signForm(f);
+        b.signForm(p);
+        b.signForm(r);
     }
     catch (std::exception const &e) {
-        std::cout << b1 << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     }
+
+    b.executeForm(f);
+    b.executeForm(p);
+    b.executeForm(r);
     std::cout << f << std::endl;
-
-
-    std::cout << "second try : " << std::endl;
-    try {
-        f.beSigned(b);
-    }
-    catch (std::exception const &e) {
-        std::cout << b << e.what() << std::endl << std::endl;
-    }
-
-    std::cout << f << std::endl;
-    b.signForm(f);
-    b.signForm(f1);
 
     return 0;
 }
