@@ -1,15 +1,43 @@
-template<typename array, typename function>
+#include <iostream>
+
+template<typename T>
 class Array {
 public:
-    Array();
+    Array() : content(NULL), size(0) {
+        return;
+    }
 
-    Array(unsigned int n);
+    Array(unsigned int n) : content(new T[n]), size(n) {
+    }
 
-    Array(Array &src);
+    Array(Array const &src) {
+        *this = src;
+    }
 
-    ~Array();
+    Array &operator=(const Array<T> &rhs) {
+        this->content = rhs.content;
+        for (int i = 0; i < rhs.getSize(); i++) {
+            content[i] = rhs.content[i];
+        }
+        return *this;
+    }
 
-    Array &operator[](unsigned int n);
+    T &operator[](unsigned int n) {
+        if (n >= size) {
+            throw std::exception();
+        }
+        else {
+            return this->content[n];
+        }
+    }
 
-    unsigned int size() const;
+    ~Array() {
+    }
+
+    unsigned int getSize() const {
+        return this->size;
+    }
+
+    T *content;
+    unsigned size;
 };

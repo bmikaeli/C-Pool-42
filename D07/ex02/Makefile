@@ -1,6 +1,5 @@
 NAME = ex02
-SRC = Array.cpp \
-main.cpp
+SRC = main.cpp
 FLAG = -Wall -Wextra -Werror
 all : $(NAME)
 $(NAME) : $(OBJ)
