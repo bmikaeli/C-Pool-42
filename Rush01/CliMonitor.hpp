@@ -6,7 +6,9 @@
 #include <signal.h>
 #include <list>
 #include "IMonitorModule.hpp"
-
+#include <iostream>
+#include <ctime>
+#include <unistd.h>
 class CliMonitor : public IMonitorDisplay {
 
 public:
@@ -14,7 +16,8 @@ public:
 
     ~CliMonitor();
     void drawBorders(WINDOW * screen);
-    void checkResize(void);
+    void checkResize(WINDOW * screen);
+    void launch(void);
     void addModule(IMonitorModule * src);
 private:
     int width;

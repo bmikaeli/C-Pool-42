@@ -9,6 +9,12 @@ int main() {
     DateModule test3;
     CliMonitor cli;
 
+    cli.addModule(&test);
+    cli.addModule(&test2);
+    cli.addModule(&test3);
+
+//    cli.launch();
+
     test.execute();
     test2.execute();
     test3.execute();
